@@ -13,20 +13,21 @@ Best CTF in August 2021!
 
 # Things to include in ReadMe.md
 
-| Things to include   | Example                                                                   |
-| ------------------- | ------------------------------------------------------------------------- |
-| Challenge Details   | `Caesar thought of the perfect cipher. Can you break it?`                 |
-| Setup instructions  | `Step 1: run docker_build.sh ......`                                      |
-| Possible hints      | `Hint: What Caesar Cipher?`                                               |
-| Key concepts        | `Scripting`                                                               |
-| Solution            | `Write a script to brute force all the combinations of the caesar cipher` |
-| Learning objectives | `Learn about the Caesar Cipher`                                           |
-| Flag                | `greyhats{salad_is_great_but_cipher_is_not}`                              |
+| Things to include               | Example                                                                   |
+| ------------------------------- | ------------------------------------------------------------------------- |
+| Challenge Details               | `Caesar thought of the perfect cipher. Can you break it?`                 |
+| Setup instructions              | `Step 1: run docker_build.sh ......`                                      |
+| Possible hints                  | `Hint: What Caesar Cipher?`                                               |
+| Key concepts                    | `Scripting`                                                               |
+| Solution (Can also be a script) | `Write a script to brute force all the combinations of the caesar cipher` |
+| Learning objectives             | `Learn about the Caesar Cipher`                                           |
+| Flag                            | `greyhats{salad_is_great_but_cipher_is_not}`                              |
 
 ## How to add a challenge?
 
 1. Create your own branch and commit to the branch
 1. Make a pull request to merge the challenge (Skip this if you already have a PR)
+   1. Add the correct labels accordingly (If unsure send it in the challenge creation chat)
 1. After checking your request will be merged or changes will be requested
    1. If changes are requested, back to 1.
    1. If approved go to 4
