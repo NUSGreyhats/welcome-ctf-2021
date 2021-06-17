@@ -2,6 +2,9 @@
 
 Best CTF in August 2021!
 
+Refer to your team allocations [here](https://docs.google.com/document/d/1xSf6-o5pWJxXBMEMbOabLYGmPfY87qLdO5AMpPzwIDw/edit?usp=sharing)
+PM any of us if you have any questioons
+
 # For challenge creation
 
 - At least 3 challenges for each of the categories (Except OSint)
