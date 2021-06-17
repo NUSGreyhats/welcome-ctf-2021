@@ -31,3 +31,14 @@ Best CTF in August 2021!
    1. If changes are requested, back to 1.
    1. If approved go to 4
 1. You are done :D
+
+# For challenge testing
+
+- Download [Docker](https://www.docker.com/)
+- Clone the repository using `git clone https://github.com/NUSGreyhats/welcome-ctf-2021.git`
+- Go into the folder of the file you are testing
+- Follow build instructions
+- Test the challenge
+    - Feedback the challenge onto the kanban board for each of the categories (Will be under Projects Tab of Github)
+    - Follow the format that is given
+- This will be used to track who has complete which challenges
