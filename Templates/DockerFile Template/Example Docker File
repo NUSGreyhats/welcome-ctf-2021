@@ -1,0 +1,21 @@
+# Please rename this file as DockerFile when deploying inside ur folders
+
+
+# Os you want to use
+FROM ubuntu:latest
+
+# Commands to run on docker image
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install python3 python3-pip
+
+# Copy files to docker image
+## In this example it copies all the files from current directory to `/app` in the docker image
+COPY . /app
+
+
+# Install dependencies
+RUN pip3 install -r /app/requirements.txt
+
+
+# Command to start your program
+CMD python3 /app/app.py
