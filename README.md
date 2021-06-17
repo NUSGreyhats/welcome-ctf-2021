@@ -43,6 +43,9 @@ PM any of us if you have any questioons
 - Go into the folder of the file you are testing
 - Follow build instructions
 - Test the challenge
-  - Feedback the challenge onto the kanban board for each of the categories (Will be under Projects Tab of Github)
+  - Feedback the challenge based on the issue that is provided for the challenge
   - Follow the format that is given
+    - Rating
+    - Feedback
+    - Category/Difficulty you think it should be in (If the category / difficulty is different)
 - This will be used to track who has complete which challenges
