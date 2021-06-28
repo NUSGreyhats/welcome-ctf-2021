@@ -1,7 +1,7 @@
 from pwn import *
 
-p = process("./distinct.out")
-e = ELF("./distinct.out")
+p = process("./dist/distinct.o")
+e = ELF("./dist/distinct.o")
 
 def enter(num):
     p.sendlineafter(f'#', str(num))
