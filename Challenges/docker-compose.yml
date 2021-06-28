@@ -14,9 +14,3 @@ x-pwn:
         - seccomp=unconfined
 
 services:
-    some_pwn:
-        *pwn
-        build: ./path/to/folder/with/dockerfile
-        ports:
-            - "<EXPOSED_PORT>:5000"
-    

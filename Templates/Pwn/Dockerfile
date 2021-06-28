@@ -1,10 +1,6 @@
 # welcome-ctf pwn jail
 ## Based on https://github.com/redpwn/jail
 
-# Substitute
-# e.g. ARG BINARY=./dist/nani.o
-ARG BINARY=<PATH_TO_BINARY_RELATIVE_TO_DOCKERFILE>
-
 # This is the source filesystem that we copy important runtime files from
 FROM ubuntu:18.04 AS src
 # Install additional dependencies here e.g. 32-bit runtime (lib32z1)
@@ -25,6 +21,6 @@ COPY --from=src /bin/sh /srv/bin/sh
 COPY --from=src /lib/ /srv/lib/
 COPY --from=src /lib64/ /srv/lib64/
 
-# Copy over challenge files
+# Copy over challenge files. Substitute ${BINARY} with the path to your binary
 COPY ${BINARY} /srv/app/run
 COPY ./flag.txt /srv/app/flag.txt
