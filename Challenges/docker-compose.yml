@@ -3,4 +3,14 @@ services:
     distinct:
         build: ./Binary/Reverse/Pwn/distinct
         ports:
-            - "9999:9999"
+            - "5000:5000"
+        cap_drop:
+            - all
+        cap_add:
+            - chown
+            - setuid
+            - setgid
+            - sys_admin
+        security_opt:
+            - apparmor=unconfined
+            - seccomp=unconfined
