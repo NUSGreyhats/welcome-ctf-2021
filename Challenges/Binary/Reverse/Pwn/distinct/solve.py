@@ -1,6 +1,9 @@
 from pwn import *
 
-p = process("./dist/distinct.o")
+if args.REMOTE:
+    p = remote('localhost', 9999)
+else:
+    p = process("./dist/distinct.o")
 e = ELF("./dist/distinct.o")
 
 def enter(num):

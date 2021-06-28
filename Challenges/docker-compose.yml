@@ -1,0 +1,6 @@
+version: '3'
+services: 
+    distinct:
+        build: ./Binary/Reverse/Pwn/distinct
+        ports:
+            - "9999:9999"
