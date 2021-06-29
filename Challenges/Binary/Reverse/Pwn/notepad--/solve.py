@@ -1,6 +1,10 @@
 from pwn import *
 
-p = process("./dist/notepad.o", env={'LD_PRELOAD': './dist/libc.so.6'})
+if args.REMOTE:
+    p = remote('localhost', 5001)
+else:
+    p = process("./dist/notepad.o", env={'LD_PRELOAD': './dist/libc.so.6'})
+
 e = ELF("./dist/notepad.o")
 libc = ELF("./dist/libc.so.6")
 

@@ -14,3 +14,8 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    notepad_minus_minus:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/notepad--
+        ports:
+            - "5001:5000"
