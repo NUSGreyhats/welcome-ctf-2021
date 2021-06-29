@@ -1,2 +1,2 @@
-main: notepad.c
+notepad: notepad.c
 	gcc notepad.c -Wl,-z,norelro -o notepad.o
