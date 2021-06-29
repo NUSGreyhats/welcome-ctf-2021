@@ -1,3 +1,2 @@
-# ignore binary output files
-*.o
+# ignore core output
 core
