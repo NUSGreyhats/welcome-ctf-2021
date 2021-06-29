@@ -14,3 +14,8 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    hexdump-bof:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/hexdump-bof
+        ports:
+            - "5002:5000"

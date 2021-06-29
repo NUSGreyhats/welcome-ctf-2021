@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <signal.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #define SZ 0x20
 #define OVERFLOW_SZ 0x10
@@ -47,13 +50,24 @@ void vuln() {
 }
 
 void win() {
-    char exec[0x10];
-    strcpy(exec, "/bin/sh");
-    system(exec);
+    system("/bin/sh");
 }
 
-int main() {
-    // TODO setup()
+void timeout(int signum) {
+    printf("Timeout!");
+    exit(-1);
+}
+
+void setup() {
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+    signal(SIGALRM, timeout);
+    alarm(60);
+}
+
+int main() { 
+    setup();
     printf("=== HexDump Master ===\n");
     printf("Prints the input back at you, in hexdump format, including some extra data... I wonder what that data is :)\n");
     printf("Btw, there is an inaccessible function at %p (win). What will it do?\n\n", win);
