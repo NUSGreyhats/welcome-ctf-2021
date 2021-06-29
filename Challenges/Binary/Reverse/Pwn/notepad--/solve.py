@@ -1,8 +1,8 @@
 from pwn import *
 
-p = process("./notepad.out", env={'LD_PRELOAD': './libc.so.6'})
-e = ELF("./notepad.out")
-libc = ELF("./libc.so.6")
+p = process("./dist/notepad.o", env={'LD_PRELOAD': './dist/libc.so.6'})
+e = ELF("./dist/notepad.o")
+libc = ELF("./dist/libc.so.6")
 
 def view_note(idx):
     p.sendlineafter(">", "2")
