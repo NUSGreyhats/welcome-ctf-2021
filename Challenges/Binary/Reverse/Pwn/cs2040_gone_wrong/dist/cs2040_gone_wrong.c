@@ -8,8 +8,8 @@ typedef unsigned long long Value;
 
 typedef struct Node {
     Value value;
-    Node* left;
-    Node* right;
+    struct Node* left;
+    struct Node* right;
 } Node;
 
 Node* root = NULL;
@@ -49,12 +49,12 @@ Node** find(Value value) {
     while(1) {
         if (*curRef == NULL)
             return NULL;
-        else if (value == *curRef->value)
+        else if (value == (*curRef)->value)
             return curRef;
-        else if (value > *curRef->value)
-            curRef = &curRef->right;
+        else if (value > (*curRef)->value)
+            curRef = &(*curRef)->right;
         else /* if (value < *curRef->value) */
-            curRef = &curRef->left;
+            curRef = &(*curRef)->left;
     }
 }
 
@@ -62,40 +62,53 @@ void delete(Node** nodeRef) {
     if (nodeRef == NULL)
         return;
 
-    if (*nodeRef->left == NULL && *nodeRef->right == NULL) {
-        free(*nodeRef);
+    Node* node = *nodeRef;
+
+    if (node->left == NULL && node->right == NULL) {
+        free(node);
         *nodeRef = NULL; // TODO introduce bug here?
     }
-    else if (*nodeRef->right != NULL) {
-        Node** curRef = nodeRef->right; // TODO sus
+    else if (node->right != NULL) {
+        Node** curRef = &node->right;
         while (1) {
-            if (*curRef->left == NULL) {
-                *nodeRef->value = *curRef->value;
+            Node* cur = *curRef;
+            if (cur->left == NULL) {
+                node->value = cur->value;
                 delete(curRef);
                 return;
             }
             else {
-                curRef = curRef->left;
+                curRef = &cur->left;
             }
         }
     }
-    else if (*nodeRef->left != NULL) {
-        Node** curRef = nodeRef->left; // TODO sus
+    else if (node->left != NULL) {
+        Node** curRef = &node->left;
         while (1) {
-            if (*curRef->right == NULL) {
-                *nodeRef->value = *curRef->value;
+            Node* cur = *curRef;
+            if (cur->right == NULL) {
+                node->value = cur->value;
                 delete(curRef);
                 return;
             }
             else {
-                curRef = curRef->right;
+                curRef = &cur->right;
             }
         }
     }
 }
 
-void view() {
+void print(Node* node) {
+    if (node == NULL)
+        return;
+    print(node->left);
+    printf("%lld ", node->value);
+    print(node->right);
+}
 
+void view() {
+    print(root);
+    puts("");
 }
 
 void menu() {
@@ -107,7 +120,7 @@ void menu() {
 }
 
 Value prompt(char* text) {
-    int opt;
+    Value opt;
     printf("%s: ", text);
     scanf("%llu", &opt);
     return opt;
