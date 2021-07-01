@@ -47,14 +47,15 @@ Node** find(Value value) {
     Node** curRef = &root;
 
     while(1) {
-        if (*curRef == NULL)
+        Node* cur = *curRef;
+        if (cur == NULL)
             return NULL;
-        else if (value == (*curRef)->value)
+        else if (value == cur->value)
             return curRef;
-        else if (value > (*curRef)->value)
-            curRef = &(*curRef)->right;
-        else /* if (value < *curRef->value) */
-            curRef = &(*curRef)->left;
+        else if (value > cur->value)
+            curRef = &cur->right;
+        else /* if (value < cur->value) */
+            curRef = &cur->left;
     }
 }
 
@@ -66,7 +67,7 @@ void delete(Node** nodeRef) {
 
     if (node->left == NULL && node->right == NULL) {
         free(node);
-        *nodeRef = NULL; // TODO introduce bug here?
+        // *nodeRef = NULL; // TODO introduce bug here?
     }
     else if (node->right != NULL) {
         Node** curRef = &node->right;
