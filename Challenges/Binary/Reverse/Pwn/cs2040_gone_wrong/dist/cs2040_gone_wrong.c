@@ -48,8 +48,10 @@ Node** find(Value value) {
 
     while(1) {
         Node* cur = *curRef;
-        if (cur == NULL)
+        if (cur == NULL) {
+            printf("%lld not found\n", value);
             return NULL;
+        }
         else if (value == cur->value)
             return curRef;
         else if (value > cur->value)
