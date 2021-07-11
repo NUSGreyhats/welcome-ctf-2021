@@ -14,3 +14,8 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    4bites:
+        << : *crypto
+        build : ./Cryptography/4bites
+        ports :
+            - "5000:5000"
