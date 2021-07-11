@@ -14,3 +14,8 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    burger:
+        << : *crypto
+        build : ./Cryptography/burger
+        ports :
+            - "21501:21501"
