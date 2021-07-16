@@ -31,4 +31,4 @@ services:
         << : *crypto
         build : ./Cryptography/burger
         ports :
-            - "21501:21501"
+            - "21501:5000"
