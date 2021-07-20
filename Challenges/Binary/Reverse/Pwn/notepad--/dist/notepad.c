@@ -59,9 +59,9 @@ void setup() {
 
 int main() { 
     setup();
-    printf("========== Notepad-- Professional Edition ==========");
-    printf("[1] Create Note");
-    printf("[2] View Note");
+    printf("========== Notepad-- Professional Edition ==========\n");
+    printf("[1] Create Note\n");
+    printf("[2] View Note\n");
 
     while (1)
     {
