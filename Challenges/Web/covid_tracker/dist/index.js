@@ -3,6 +3,7 @@ const session = require('express-session');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
+app.use(express.static('static'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(session({ secret: process.env.SECRET, saveUninitialized: false, resave: false }));
@@ -11,10 +12,6 @@ const user_db = new sqlite3.Database(':memory:');
 const location_db = new sqlite3.Database(':memory:');
 
 const port = 3000;
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
 
 app.post('/api/login', (req, res) => {
   const {username, password} = req.body;
