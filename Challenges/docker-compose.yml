@@ -14,3 +14,7 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    covid_tracker:
+        build: ./Web/covid_tracker
+        ports:
+            - "3000:3000"
