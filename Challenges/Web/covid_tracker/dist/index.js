@@ -35,7 +35,7 @@ app.post('/api/locations', (req, res) => {
   }
   const {search} = req.body;
     
-  location_db.all(`SELECT name, geo FROM locations WHERE name LIKE "${'%' + search + '%'}"`, (err, rows) => {
+  location_db.all(`SELECT name, geo, cases FROM locations WHERE name LIKE "${'%' + search + '%'}"`, (err, rows) => {
     if(err) {
       res.status(400).send({ err: err.message });
     } else if (rows) {

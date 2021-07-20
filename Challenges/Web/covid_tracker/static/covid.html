@@ -21,20 +21,43 @@
 
         <!-- AlpineJS -->
         <script src="//unpkg.com/alpinejs" defer></script>
+
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""/>
     </head>
     <body>
-        <div class="main" x-data="locationData()" x-init="searchLocations()">
+        <div class="container main" id="location-main" x-data="locationData()" x-init="searchLocations()">
+            <span class="title">
+                <img src="/favicon.jpg">
+                <h1>Covid Tracker Map</h1>
+            </span>
+
             <h3 x-text="error" class="error"></h3>
-            <input type="text" class="search" x-model="search" x-on:change="searchLocations()">
-            <div x-html="JSON.stringify(locations)"></div>
+            <input type="text" class="search" x-model="search" x-on:change="searchLocations()" placeholder="Search">
+            <!--<div x-html="JSON.stringify(locations)"></div>-->
 
             <div id="map"></div>
         </div>
+
+
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
         <script>
+            var mymap = L.map('map').setView([1.3623796467781062, 103.83287520711916], 11);
+            const markers = new L.LayerGroup();
+            markers.addTo(mymap);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mymap);
+
             function locationData() {
                 return {
                     search: '',
-                    locations: [],
                     error: '',
 
                     searchLocations() {
@@ -45,20 +68,21 @@
                         })
                         .then(res => { if(res.status == 403) { throw Error('Unauthorized') } else { return res; } })
                         .then(res => res.json())
-                        .then(res => this.locations = res)
+                        .then(res => this.locationResults(res))
                         .catch(res => this.error = res.message);
+                    },
+
+                    locationResults(locations) {
+                        console.log(locations);
+                        markers.clearLayers();
+                        for(const loc of locations) {
+                            const coords = loc.geo.split(",");
+                            L.marker(coords).bindTooltip(`${loc.name}: ${loc.cases}`, {permanent: true, direction: 'right'}).addTo(markers);
+                        }
                     }
+
                 };
             }
-
-            function initMap() {
-                map = new google.maps.Map(document.getElementById("map"), {
-                    center: { lat: -34.397, lng: 150.644 },
-                    zoom: 8,
-                });
-            }
         </script>
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly" async></script>
     </body>
 </html>

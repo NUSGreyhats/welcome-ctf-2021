@@ -16,6 +16,27 @@ body {
 
 #map {
   min-height: 50vh;
+  width: 100%;
   margin: 0;
   padding: 0;
+}
+
+#location-main {
+    margin: auto;
+}
+
+.title {
+    display: inline-flex;
+}
+
+.title h1 {
+    display: inline;
+    margin: 0;
+    margin-left: 2rem;
+}
+
+.title img {
+    width: 5rem;
+    height: 5rem;
+    display: inline;
 }
