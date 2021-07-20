@@ -14,3 +14,8 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    bash_injection:
+        << : *general
+        build: ./General/Bash_Injection
+        ports:
+            - "7008:5000"
