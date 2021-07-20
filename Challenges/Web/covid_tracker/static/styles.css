@@ -1,0 +1,15 @@
+
+.login-body {
+    min-height: 100vh;
+    display: flex;
+}
+
+.login-form {
+    margin: auto;
+}
+
+.login-error {
+    font-family: monospace;
+    color: red;
+    text-align: center;
+}
