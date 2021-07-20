@@ -52,13 +52,13 @@ user_db.serialize(() => {
 });
 
 location_db.serialize(() => {
-  location_db.run("CREATE TABLE locations(name TEXT, geo TEXT)");
+  location_db.run("CREATE TABLE locations(name TEXT, geo TEXT, cases INT)");
   location_db.run("CREATE TABLE flag(value TEXT)");
-  location_db.run("INSERT INTO locations VALUES (?, ?)", "Bukit Batok", "1.359165737350038, 103.76271107619375");
-  location_db.run("INSERT INTO locations VALUES (?, ?)", "NUS", "1.2971374643210083, 103.77635831153047");
-  location_db.run("INSERT INTO locations VALUES (?, ?)", "Pasir Ris", "1.37635430359135, 103.94570985251505");
-  location_db.run("INSERT INTO locations VALUES (?, ?)", "Changi Airport", "1.3642914894747193, 103.99165954341039");
-  location_db.run("INSERT INTO locations VALUES (?, ?)", "Tekong Island", "1.417049237194686, 104.03895113481549");
+  location_db.run("INSERT INTO locations VALUES (?, ?, ?)", "Bukit Batok", "1.359165737350038, 103.76271107619375", 123);
+  location_db.run("INSERT INTO locations VALUES (?, ?, ?)", "NUS", "1.2971374643210083, 103.77635831153047", 43);
+  location_db.run("INSERT INTO locations VALUES (?, ?, ?)", "Pasir Ris", "1.37635430359135, 103.94570985251505", 62);
+  location_db.run("INSERT INTO locations VALUES (?, ?, ?)", "Changi Airport", "1.3642914894747193, 103.99165954341039", 121);
+  location_db.run("INSERT INTO locations VALUES (?, ?, ?)", "Tekong Island", "1.417049237194686, 104.03895113481549", 71);
   
   const flag = process.env.FLAG;
   location_db.run("INSERT INTO flag VALUES (?)", flag); // catch me if you can!
