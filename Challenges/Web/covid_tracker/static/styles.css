@@ -1,15 +1,21 @@
 
-.login-body {
+body {
     min-height: 100vh;
     display: flex;
 }
 
-.login-form {
+.main {
     margin: auto;
 }
 
-.login-error {
+.error {
     font-family: monospace;
     color: red;
     text-align: center;
+}
+
+#map {
+  min-height: 50vh;
+  margin: 0;
+  padding: 0;
 }

@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Login | Covid Tracker</title>
-        <meta name="description" content="Login to Covid Tracker">
+        <title>Map | Covid Tracker</title>
+        <meta name="description" content="Covid Tracker Map">
         <meta name="author" content="NUS Greyhats">
         <link rel="icon" href="/favicon.jpg">
         <link rel="stylesheet" href="/styles.css">
@@ -22,42 +22,43 @@
         <!-- AlpineJS -->
         <script src="//unpkg.com/alpinejs" defer></script>
     </head>
-    <body class="login-body container">
-        <form class="login-form" x-data="loginForm()" @submit.prevent="submitData">
-            <fieldset>
-                <h1>Covid Tracker Login</h1>
-                <h3 class="login-error" x-text="message"></h3>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" x-model="formData.username">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" x-model="formData.password">
-                <input class="button-primary" type="submit" value="login">
-            </fieldset>
-        </form>
+    <body>
+        <div class="main" x-data="locationData()" x-init="searchLocations()">
+            <h3 x-text="error" class="error"></h3>
+            <input type="text" class="search" x-model="search" x-on:change="searchLocations()">
+            <div x-html="JSON.stringify(locations)"></div>
 
+            <div id="map"></div>
+        </div>
         <script>
-            function loginForm() {
+            function locationData() {
                 return {
-                    formData: {
-                        username: '',
-                        password: '',
-                    },
-                    message: '',
-                    submitData() {
-                        this.message = '';
-                        fetch('/api/login', {
+                    search: '',
+                    locations: [],
+                    error: '',
+
+                    searchLocations() {
+                        fetch('/api/locations', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(this.formData)
+                            body: JSON.stringify({ search: this.search })
                         })
-                        .then(res => {
-                            if(res.status != 200) {
-                                res.json().then(b => this.message = b.err);
-                            }
-                        });
+                        .then(res => { if(res.status == 403) { throw Error('Unauthorized') } else { return res; } })
+                        .then(res => res.json())
+                        .then(res => this.locations = res)
+                        .catch(res => this.error = res.message);
                     }
                 };
             }
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById("map"), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8,
+                });
+            }
         </script>
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly" async></script>
     </body>
 </html>

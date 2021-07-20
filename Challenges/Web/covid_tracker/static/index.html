@@ -22,11 +22,11 @@
         <!-- AlpineJS -->
         <script src="//unpkg.com/alpinejs" defer></script>
     </head>
-    <body class="login-body container">
-        <form class="login-form" x-data="loginForm()" @submit.prevent="submitData">
+    <body class="container">
+        <form class="main" x-data="loginForm()" @submit.prevent="submitData">
             <fieldset>
                 <h1>Covid Tracker Login</h1>
-                <h3 class="login-error" x-text="message"></h3>
+                <h3 class="error" x-text="message"></h3>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" x-model="formData.username">
                 <label for="password">Password</label>
@@ -48,11 +48,13 @@
                         fetch('/api/login', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(this.formData)
+                            body: JSON.stringify(this.formData),
                         })
                         .then(res => {
                             if(res.status != 200) {
                                 res.json().then(b => this.message = b.err);
+                            } else {
+                                window.location.href = res.url;
                             }
                         });
                     }
