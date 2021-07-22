@@ -474,7 +474,7 @@ function setup() {
 	serial = randomLetter() + randomLetter() + Math.floor(Math.random() * 10000).toString().padStart(4, "0") + randomLetter() + randomLetter();
 
 	wires = [];
-	const wireCount = 3 + Math.floor(Math.random()*2);
+	const wireCount = 3 + Math.floor(Math.random()*3);
 
 	for (let i = 0; i < wireCount; i++) {
 		wires.push({ cut: false, color: Math.floor(Math.random()*5) });
