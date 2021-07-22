@@ -50,4 +50,4 @@ Take the 4 letters in the serial number: p,q,r,s. Let A represents 0, B represen
 Intro to wasm RE.
 
 ### Flag
-welcome{Wh0_n33D5_a_p4rTnER}
+greyhats{Wh0_n33D5_a_p4rTnER}

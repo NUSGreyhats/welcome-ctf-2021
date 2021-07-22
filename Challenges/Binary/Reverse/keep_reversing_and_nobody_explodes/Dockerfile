@@ -33,18 +33,19 @@ EXPOSE 80
 COPY src /var/www/html
 WORKDIR /var/www/html
 
+# RUN gcc -Os -s static/flag.c -o 44a7dc797e8b3457b677b1c5012717d0
+
 # Compile C code to wasm
 RUN emcc main.c -o main.js                    \
 		-s WASM=1                                 \
 		-s EXPORTED_RUNTIME_METHODS=["ccall"]     \
 		-s EXPORTED_FUNCTIONS=["_malloc","_free"] \
 		-s MODULARIZE                             \
-		-g2                                       \
-		--embed-file static/flag.txt
+		-g2
+		# --embed-file static/flag.txt
 
-# Remove source code and flag file to prevent people from finding it
+# Remove source code to prevent people from finding it
 RUN rm main.c
-RUN rm static/flag.txt
 
 # Run localhost
 CMD ["nginx", "-g", "daemon off;"]

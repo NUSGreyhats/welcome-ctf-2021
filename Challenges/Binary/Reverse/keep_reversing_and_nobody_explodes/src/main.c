@@ -4,6 +4,9 @@
 
 char wirePass = 0, seqPass = 0, condPass = 0;
 
+int hash[30] = {121,73,138,107,184,217,242,46,93,113,90,147,248,92,60,106,123,80,11,219,134,62,60,208,21,55,232,31,21,69};
+int key[30] = {30,59,239,18,208,184,134,93,38,38,50,163,167,50,15,89,63,101,84,186,217,78,8,162,65,89,173,77,104,69};
+
 /**
  * Return value (status code):
  * 		0 => nothing
@@ -71,6 +74,7 @@ char getWireIndex(char color[], int length) {
 		}
 		return result;
 	}
+	return -1;
 }
 
 EMSCRIPTEN_KEEPALIVE
@@ -135,19 +139,10 @@ char* check() {
 	if (wirePass & 2 || seqPass & 2 || condPass & 2)
 		return "Bomb exploded :( Be a little more careful next time, will ya?";
 	else if (wirePass & 1 && seqPass & 1 && condPass & 1) {
-		FILE* fp = fopen("static/flag.txt", "rb");
-
-		char* flag = (char *) malloc(29);
-		int i = 0;
-		while(!feof(fp))  {
-			char ch = fgetc(fp);
-			if (ch != EOF) {
-				flag[i++] = ch;
-			}
+		char* flag = (char *) malloc(30);
+		for (int i = 0; i < 30; i++) {
+			flag[i] = key[i] ^ hash[i];
 		}
-		flag[i] = '\0';
-
-		fclose(fp);
 		puts(flag);
 		;return flag;
 	}
