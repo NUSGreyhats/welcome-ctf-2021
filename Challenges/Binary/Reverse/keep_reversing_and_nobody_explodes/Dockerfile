@@ -40,7 +40,7 @@ RUN emcc main.c -o main.js                    \
 		-s EXPORTED_FUNCTIONS=["_malloc","_free"] \
 		-s MODULARIZE                             \
 		-g2                                       \
-		--preload-file static/flag.txt
+		--embed-file static/flag.txt
 
 # Remove source code to prevent people from finding it
 RUN rm main.c
