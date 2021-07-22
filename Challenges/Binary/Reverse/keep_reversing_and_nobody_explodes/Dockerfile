@@ -42,8 +42,9 @@ RUN emcc main.c -o main.js                    \
 		-g2                                       \
 		--embed-file static/flag.txt
 
-# Remove source code to prevent people from finding it
+# Remove source code and flag file to prevent people from finding it
 RUN rm main.c
+RUN rm static/flag.txt
 
 # Run localhost
 CMD ["nginx", "-g", "daemon off;"]
