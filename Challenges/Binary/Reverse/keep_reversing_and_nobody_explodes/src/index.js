@@ -49,6 +49,7 @@ const indiX = condBtnX + condBtnRadius, indiY = condBtnY + condBtnRadius, indiZ 
 
 const pointer = new THREE.Vector2();
 const digitalFontUrl = "../static/digital.typeface.json";
+let digitalFont;
 const loader = new THREE.FontLoader();
 
 function init() {
@@ -206,10 +207,13 @@ function init() {
 	indicatorLight.position.set( indiX, indiY, indiZ + indiDepth/2 );
 	scene.add( indicatorLight );
 
-	setup();
-	setSerial(serial);
-	renderWires();
-	renderSequenceBtns();
+	loader.load( digitalFontUrl, function(font) {
+		digitalFont = font;
+		setup();
+		setSerial(serial);
+		renderWires();
+		renderSequenceBtns();
+	});
 
 	document.addEventListener( 'mousemove', onPointerMove, false );
 	document.addEventListener( 'click', onPointerClick, false );
@@ -289,53 +293,45 @@ function animate() {
 
 function updateTimer( textContent ) {
 	let x = timerX - timerWidth/2, y = timerY - timerHeight/2, z = bombDepth/2 + timerDepth;
-	loader.load(
-		digitalFontUrl,
-		function(font) {
-			const geometry = new THREE.TextGeometry( textContent, {
-				font: font,
-				size: 7,
-				height: 0.15,
-				curveSegments: 5,
-			});
-			const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-			if (timerText != null) scene.remove( timerText );
-			timerText = new THREE.Mesh( geometry, material );
-			timerText.position.set( x+4, y+4, z );
-			scene.add( timerText );
-		});
+	const geometry = new THREE.TextGeometry( textContent, {
+		font: digitalFont,
+		size: 7,
+		height: 0.15,
+		curveSegments: 5,
+	});
+	const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+	if (timerText != null) scene.remove( timerText );
+	timerText = new THREE.Mesh( geometry, material );
+	timerText.position.set( x+4, y+4, z );
+	scene.add( timerText );
 }
 
 function setSerial( textContent ) {
 	let x = bombWidth/2, y = -2, z = bombDepth/2;
-	loader.load(
-		digitalFontUrl,
-		function(font) {
-			const plateThickness = 0.2;
-			const geometry = new THREE.TextGeometry( textContent , {
-				font: font,
-				size: 5,
-				height: 0.15,
-				curveSegments: 12,
-			});
-			const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-			const serial = new THREE.Mesh( geometry, material );
-			serial.position.set ( x + plateThickness/2, y, z );
+	const plateThickness = 0.2;
+	const geometry = new THREE.TextGeometry( textContent , {
+		font: digitalFont,
+		size: 5,
+		height: 0.15,
+		curveSegments: 12,
+	});
+	const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+	const serial = new THREE.Mesh( geometry, material );
+	serial.position.set ( x + plateThickness/2, y, z );
 
-			serial.rotation.y = Math.PI / 2;
-			serial.rotation.z = -Math.PI / 2;
+	serial.rotation.y = Math.PI / 2;
+	serial.rotation.z = -Math.PI / 2;
 
-			const plateGeometry = new THREE.BoxGeometry(0.2, 32, 8);
-			const plateMaterial = new THREE.MeshStandardMaterial({
-				metalness: 1,
-				roughness: 0.5,
-			});
-			const plate = new THREE.Mesh( plateGeometry, plateMaterial );
-			plate.position.set( x+0.05, y-14, z-2.5 );
+	const plateGeometry = new THREE.BoxGeometry(0.2, 32, 8);
+	const plateMaterial = new THREE.MeshStandardMaterial({
+		metalness: 1,
+		roughness: 0.5,
+	});
+	const plate = new THREE.Mesh( plateGeometry, plateMaterial );
+	plate.position.set( x+0.05, y-13, z-2.5 );
 
-			scene.add( serial );
-			scene.add( plate );
-		});
+	scene.add( serial );
+	scene.add( plate );
 }
 
 function renderWires() {
@@ -458,23 +454,18 @@ function renderSequenceBtns() {
 			scene.add( btnLight );
 		}
 		
-		loader.load(
-			digitalFontUrl,
-			function(font) {
-				const geometry = new THREE.TextGeometry( String.fromCharCode(65 + i), {
-					font: font,
-					size: 7,
-					height: 0.12,
-					curveSegments: 1,
-				});
-				const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-				const text = new THREE.Mesh( geometry, material );
-				text.position.set( seqBtnMesh.position.x - 2, seqBtnMesh.position.y - 3, seqBtnMesh.position.z + seqBtnDepth + btnCapBevel );
+		const geometry = new THREE.TextGeometry( String.fromCharCode(65 + i), {
+			font: digitalFont,
+			size: 7,
+			height: 0.12,
+			curveSegments: 1,
+		});
+		const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+		const text = new THREE.Mesh( geometry, material );
+		text.position.set( seqBtnMesh.position.x - 2, seqBtnMesh.position.y - 3, seqBtnMesh.position.z + seqBtnDepth + btnCapBevel );
 
-				seqBtnObjects[i].mesh.push( text );
-				scene.add( text );
-			}
-		)
+		seqBtnObjects[i].mesh.push( text );
+		scene.add( text );
 	}
 }
 
