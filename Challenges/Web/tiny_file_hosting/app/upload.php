@@ -5,7 +5,7 @@ define('UPLOAD_PATH', getcwd().'/upload');
 
 
 if(isset($_POST['submit'])){
-    $disallowed_exts = array('php',' php2',' php3',' php4',' php5',' php6',' php7',' phps',' phps',' pht',' phtm',' phtml',' pgif',' shtml',' htaccess',' phar');
+    $disallowed_exts = array('php','php2','php3','php4','php5','php6','php7','phps','pht','phtm','phtml','pgif','shtml','htaccess','phar');
     $file_name = $_FILES['upload_file']['name'];
     $file_size = $_FILES['upload_file']['size'];
     $temp_file = $_FILES['upload_file']['tmp_name'];
