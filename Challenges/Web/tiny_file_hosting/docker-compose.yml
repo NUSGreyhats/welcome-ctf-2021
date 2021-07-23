@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  webapp:
+    image: tiny-file-hosting:latest
+    build: .
+    ports:
+        - "9092:80"
+    volumes:
+        - ./app:/var/www/html
