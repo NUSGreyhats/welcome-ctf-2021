@@ -92,17 +92,21 @@ void cc(char cuts[], int count, char color[], int colorLen) {
 
 char* func(int n) {
 	int freq[4] = {1, 1, 1, 1};
-	int fact[4] = {1, 1, 2, 6};
 	char* output = (char *) malloc(5);
 	int k = 0;
 	n %= 24;
 	while (k < 4) {
 		int i = 0, rank = 0;
+
+		int fact = 1;
+		for (int j = 2; j <= 3-k; j++)
+			fact *= j;
+
 		for (; i < 4; i++) {
 			if (freq[i] == 0) continue;
-			if (++rank * fact[3-k] > n) break;
+			if (++rank * fact > n) break;
 		}
-		n -= --rank*fact[3-k];
+		n -= --rank*fact;
 		output[k++] = 'A' + i;
 		freq[i] = 0;
 	}
