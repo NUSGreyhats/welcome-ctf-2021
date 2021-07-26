@@ -4,10 +4,8 @@ import hashlib
 
 FLAG = b'???'
 
-alpha = list(string.ascii_lowercase)
-random.shuffle(alpha)
-
-# OTP xor encryption
+# OTP xor symmetric encryption
+# decrypt function same as encrypt function
 def encryptFlag(msg, shared_secret):
     sha512 = hashlib.sha512()
     sha512.update(str(shared_secret).encode('ascii'))
@@ -20,6 +18,10 @@ def encrypt(word):
         word[i] = alpha[ord(word[i]) - ord('a')]
     return "".join(word)
 
+alpha = list(string.ascii_lowercase)
+random.shuffle(alpha)
+
+# English word lists
 words = open('words.txt', 'r').read().split('\n')
 
 random.shuffle(words)
@@ -34,7 +36,4 @@ output = open('fries.txt', 'w')
 output.write("\n".join(words))
 
 enc = encryptFlag(FLAG, key)
-
-print(key)
-
 open('encrypted_flag', 'wb').write(enc)
