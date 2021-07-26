@@ -2,7 +2,7 @@
 
 ### Challenge Details
 
-Help I downloaded this totallysafe file from the internet and now random mesages keep popping up whenever I open notepad. Please help me fix this! I feel like someone is watching me!
+My sources tell me that someone has left a note on my machine. Can you please help me find it?
 
 ### Setup Instruction
 
