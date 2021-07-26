@@ -22,11 +22,12 @@ def extractBit(x, i):
 
 def getSharedKey(basis_1, basis_2):
     key = 0
-    for i in range(n):
+    for i in range(n - 1, -1, -1):
         basis1 = extractBit(basis_1, i)
         basis2 = extractBit(basis_2, i)
         if (basis1 == basis2):
-            key += extractBit(result, i) << i
+            key <<= 1
+            key += extractBit(result, i)
     return key
 
 mod = 174063964518299711069668788749181472608683256519506953845957678021663479790503805130054996103933773128050079469402511808215999318969731313310594568270351166276458312376711993828352623947694042786055748003333138637438781936115718720589210722171329782548215473804182484259253296933564937708732223142168136245153
@@ -82,8 +83,6 @@ flag = r.recvline()
 
 key = getSharedKey(aliceBasis, basis)
 
+print(key)
+
 print(decryptFlag(bytes.fromhex(flag.decode()), key))
-
-
-
-

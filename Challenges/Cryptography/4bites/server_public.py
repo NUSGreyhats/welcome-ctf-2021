@@ -23,24 +23,32 @@ class Qubit:
         self.basis = basis
         return self.value
 
-class Alice:
+class User:
     def __init__(self):
         self.bits = 0
         self.basis = 0
         self.key = 0
 
-    def refresh(self):
-        self.bits = randbits(n)
-        self.basis = randbits(n)        
-
     def getSharedKey(self, basis):
         self.key = 0
-        for i in range(n):
+        for i in range(n - 1, -1, -1):
             basis1 = extractBit(self.basis, i)
             basis2 = extractBit(basis, i)
             if (basis1 == basis2):
-                self.key += extractBit(self.bits, i) << i
+                self.key <<= 1
+                self.key += extractBit(self.bits, i)
         return self.key
+
+    def sendBasis(self):
+        return self.basis
+
+class Alice(User):
+    def __init__(self):
+        User.__init__(self)
+
+    def refresh(self):
+        self.bits = randbits(n)
+        self.basis = randbits(n)
 
     def sendQubits(self):
         self.refresh()
@@ -51,17 +59,17 @@ class Alice:
             qubits[i] = Qubit(bit, basis)
         return qubits
 
-    def sendBasis(self):
-        return self.basis
 
-class Bob:
+class Bob(User):
     def __init__(self):
+        User.__init__(self)
         self.u = randbits(n)
         self.a = randbits(n)
         self.b = randbits(n)
-        self.basis = 0
-        self.bits = 0
-        self.key = 0
+
+    def refresh(self):
+        self.u = (self.u * self.a + self.a + self.b + self.a * self.b) % mod
+        self.basis = self.genOutput()
 
     def genOutput(self):
         output = self.u**2
@@ -72,28 +80,12 @@ class Bob:
         output += 17
         return pow(output, 23, mod)
 
-    def refresh(self):
-        self.u = (self.u * self.a + self.a + self.b + self.a * self.b) % mod
-        self.basis = self.genOutput()
-
-    def getSharedKey(self, basis):
-        self.key = 0
-        for i in range(n):
-            basis1 = extractBit(self.basis, i)
-            basis2 = extractBit(basis, i)
-            if (basis1 == basis2):
-                self.key += extractBit(self.bits, i) << i
-        return self.key
-
     def receiveQubits(self, qubits):
         self.refresh()
         self.bits = 0
         for i in range(n):
             bit = qubits[i].measure(extractBit(self.basis, i))
             self.bits += bit << i
-    
-    def sendBasis(self):
-        return self.basis
         
     
 class Challenge():
