@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+
 import hashlib
 
 FLAG = b'???'
 
-assert len(FLAG) == 33
+assert len(FLAG) == 56
 
 block = 16
 
@@ -19,9 +21,9 @@ def hash(text):
 
 print('Welcome to Burger hashing machine!!!')
 
-while True:
+for _ in range(100):
     print('Please input your text in hexadecimal :')
     text = bytes.fromhex(input())
     text = hash(text)
     print('Here\'s the hashed value :')
-    print(text)        
+    print(text)

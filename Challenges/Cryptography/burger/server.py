@@ -2,9 +2,9 @@
 
 import hashlib
 
-FLAG = b'greyhats{y0U_Kn0W_7He_53cRet_n0W}'
+FLAG = b'greyhats{B3lanJa_m3_Burg3R_1f_y0u_3njoyed_7he_Ch@ll3n93}'
 
-assert len(FLAG) == 33
+assert len(FLAG) == 56
 
 block = 16
 
@@ -21,9 +21,9 @@ def hash(text):
 
 print('Welcome to Burger hashing machine!!!')
 
-while True:
+for _ in range(100):
     print('Please input your text in hexadecimal :')
     text = bytes.fromhex(input())
     text = hash(text)
     print('Here\'s the hashed value :')
-    print(text)        
+    print(text)

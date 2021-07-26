@@ -1,14 +1,14 @@
 from pwn import *
 import hashlib
 
-r = remote('localhost', 5000)
+r = remote('localhost', 3000)
 
 r.recvline()
 
 flag = b''
 block = 16
 
-for i in range(33):
+for i in range(100):
     r.recvline()
     payload = '00' * i
     r.sendline(payload)
@@ -20,7 +20,7 @@ for i in range(33):
         sha512 = hashlib.sha512()
         sha512.update(t)
         test = sha512.hexdigest()[:block * 2]
-        if (test.encode() == hashed[block*2*2:block*2*3]):
+        if (test.encode() == hashed[block*2*4:block*2*5]):
             flag = bytes([j]) + flag
             print(flag)
             break
