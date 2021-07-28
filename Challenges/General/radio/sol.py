@@ -37,7 +37,7 @@ t = (1/f)
 r.recvuntil('Total signal time = ')
 total = float(r.recvuntil('(')[:-1])
 n = int(total/t/4)
-rounds = 100
+rounds = 10
 
 times = []
 for i in range(n):

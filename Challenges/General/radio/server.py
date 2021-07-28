@@ -32,7 +32,7 @@ def S(t):
     calculated[t] = result
     return calculated[t]
 
-n = 10000
+n = 1000
 
 print(
 '''
