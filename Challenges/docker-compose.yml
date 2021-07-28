@@ -14,3 +14,7 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    ketchup:
+        build: ./Web/Ketchup
+        ports:
+            - "3001:8000"
