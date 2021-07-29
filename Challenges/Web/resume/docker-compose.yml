@@ -1,9 +1,0 @@
-version: "3.7"
-services:
-  webapp:
-    image: resume:latest
-    build: .
-    ports:
-        - "9091:80"
-    volumes:
-        - ./html:/var/www/html
