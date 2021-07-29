@@ -15,7 +15,7 @@ x-pwn:
 
 services:
     bash_injection:
-        << : *general
-        build: ./General/Bash_Injection
+        << : *pwn
+        build: "./General/Bash Injection"
         ports:
             - "7008:5000"
