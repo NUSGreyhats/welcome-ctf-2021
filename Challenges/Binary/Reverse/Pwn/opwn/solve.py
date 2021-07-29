@@ -2,7 +2,7 @@ from pwn import *
 context.arch = 'amd64'
 
 if args.REMOTE:
-    p = remote('localhost', 5006)
+    p = remote('localhost', 5005)
 else:
     p = process("./dist/opwn.o")
 
