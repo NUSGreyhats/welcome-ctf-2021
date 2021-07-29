@@ -59,7 +59,7 @@ void hashmap_insert(num k, num v) {
 
 void hashmap_delete(num idx) {
     byte* entry;
-    entry = &hashmap[26 * hashmap_len];
+    entry = &hashmap[26 * idx];
     memset(entry, 0x90, 26);
     entry[0] = 0xEB;
     entry[1] = 0x19;
@@ -68,7 +68,7 @@ void hashmap_delete(num idx) {
 num read_int(char* prompt) {
     num i;
     printf("%s: ", prompt);
-    scanf("%lld", &i);
+    scanf("%llu", &i);
     return i;
 }
 
