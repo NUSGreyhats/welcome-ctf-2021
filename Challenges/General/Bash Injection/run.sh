@@ -1,9 +1,12 @@
 #!/bin/bash
 
 # Read three inputs to be used as positional arguments.
-read -p "Secret #1: " sec1
-read -p "Secret #2: " sec2
-read -p "Secret #3: " sec3
+echo "Secret #1:"
+read sec1
+echo "Secret #2:"
+read sec2
+echo "Secret #3:"
+read sec3
 
 # Hint that those inputs will be used as positional arguments in a bash script (given).
 printf "\nRunning hack.sh with arguments:\n"
