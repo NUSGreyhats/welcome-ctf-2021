@@ -14,3 +14,7 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    gates:
+        build: ./Binary/Reverse/Gates
+        ports:
+            - "5111:80"
