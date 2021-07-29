@@ -31,4 +31,4 @@ services:
         << : *misc
         build : ./General/radio
         ports :
-            - "21520:5000"
+            - "5213:5000"
