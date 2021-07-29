@@ -31,4 +31,4 @@ services:
         << : *crypto
         build : ./Cryptography/4bites
         ports :
-            - "21510:5000"
+            - "5211:5000"
