@@ -12,4 +12,5 @@ then
   PORT=$2
 fi
 echo starting server on $IP:$PORT
+cd serve
 php -S $IP:$PORT
