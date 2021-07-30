@@ -14,3 +14,9 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+  resume:
+    build: Web/resume
+    ports:
+        - "5227:80"
+    extra_hosts:
+        - "topsecret.local:127.0.0.1"
