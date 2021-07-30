@@ -16,7 +16,7 @@ const port = 3000;
 app.post('/api/login', (req, res) => {
   const {username, password} = req.body;
   
-  user_db.get(`SELECT username FROM users WHERE username="${username}" AND password="${password}"`, (err, row) => {
+  user_db.get(`SELECT username FROM users WHERE username='${username}' AND password='${password}'`, (err, row) => {
     if(err) {
       res.status(400).send({ err: err.message });
     } else if (row && row.username && row.username == 'admin') {
@@ -35,7 +35,7 @@ app.post('/api/locations', (req, res) => {
   }
   const {search} = req.body;
     
-  location_db.all(`SELECT name, geo, cases FROM locations WHERE name LIKE "${'%' + search + '%'}"`, (err, rows) => {
+  location_db.all(`SELECT name, geo, cases FROM locations WHERE name LIKE '${'%' + search + '%'}'`, (err, rows) => {
     if(err) {
       res.status(400).send({ err: err.message });
     } else if (rows) {
