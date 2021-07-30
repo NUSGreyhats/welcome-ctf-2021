@@ -5,5 +5,5 @@ services:
     build: .
     ports:
         - "9092:80"
-    volumes:
-        - ./app:/var/www/html
+    #volumes:
+        #- ./app:/var/www/html
