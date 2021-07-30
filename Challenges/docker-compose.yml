@@ -14,3 +14,7 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+  no-submit-security:
+    build: Web/no_submit_security
+    ports:
+        - "5217:80"
