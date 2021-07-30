@@ -14,7 +14,7 @@ RUN rm /var/www/html/index.html
 
 # Add our source files
 RUN echo "<VirtualHost *:80>\r\nServerName SomeServer\r\nDocumentRoot /var/www/html\r\n</VirtualHost>" > /etc/apache2/sites-enabled/000-default.conf
-ADD . /var/www/html
+COPY ./serve /var/www/html
 
 # Copy and define entrypoint
 COPY ./entrypoint.sh /
