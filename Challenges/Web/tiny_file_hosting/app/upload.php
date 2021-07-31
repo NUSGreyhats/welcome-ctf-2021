@@ -10,11 +10,13 @@ if(isset($_POST['submit'])){
     $file_size = $_FILES['upload_file']['size'];
     $temp_file = $_FILES['upload_file']['tmp_name'];
     $file_ext = strtolower(substr($file_name,strrpos($file_name,".")+1));
+
     $upload_file = UPLOAD_PATH . '/' . $file_name;
     if ($file_size > 9) {
         echo '<META http-equiv="refresh" content="0;URL='.$_SERVER['HTTP_REFERER'].'">';
         die('<script>alert("This is file is too big for me to host on my server =(");</script>');
     }
+
     if (move_uploaded_file($temp_file, $upload_file)) {
         if(!in_array($file_ext,$disallowed_exts)){
              $img_path = UPLOAD_PATH . '/'. rand(10, 99).date("YmdHis").".".$file_ext;
