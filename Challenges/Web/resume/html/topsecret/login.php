@@ -1,8 +1,10 @@
 <?php
 
+/*
 if ($_SERVER['REMOTE_ADDR'] !== "127.0.0.1") {
     die("This website only serves localhost!");
 }
+*/
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -12,17 +14,17 @@ $username_err = $password_err = $login_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if username is empty
-    if(empty(trim($_POST["username"]))) {
+    if(empty(trim($_POST["username_VmyK7y39pX99A"]))) {
         $username_err = "Please enter username.";
     } else {
-        $username = trim($_POST["username"]);
+        $username = trim($_POST["username_VmyK7y39pX99A"]);
     }
 
     // Check if password is empty
-    if(empty(trim($_POST["password"]))) {
+    if(empty(trim($_POST["password_6FB8YUthKI3dK"]))) {
         $password_err = "Please enter your password.";
     } else {
-        $password = trim($_POST["password"]);
+        $password = trim($_POST["password_6FB8YUthKI3dK"]);
     }
 
     // Validate credentials
@@ -59,12 +61,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                <input type="text" name="username_VmyK7y39pX99A" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <input type="password" name="password_6FB8YUthKI3dK" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">

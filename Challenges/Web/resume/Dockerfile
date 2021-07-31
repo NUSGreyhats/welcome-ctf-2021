@@ -1,8 +1,9 @@
 FROM php:7.4.20-apache
 COPY ./topsecret.local.conf /etc/apache2/sites-enabled/topsecret.local.conf
+COPY ./apache2.conf /etc/apache2/apache2.conf
 COPY html/ /var/www/html/
 COPY cleanup-cron /etc/cron.d/cleanup-cron
-RUN chown -R www-data:www-data /var/www/html && chmod ugo+w /var/www/html/tmp && chmod 600 /var/www/html/create.php /var/www/html/topsecret/index.php
+RUN chown -R www-data:www-data /var/www/html && chmod ugo+w /var/www/html/tmp && chmod 600 /var/www/html/create.php /var/www/html/topsecret/login.php
 
 RUN echo "deb http://mirror.0x.sg/debian/ buster main\ndeb http://mirror.0x.sg/debian/ buster-updates main" >> /etc/apt/sources.list
 RUN apt update && apt install -y wget cron
