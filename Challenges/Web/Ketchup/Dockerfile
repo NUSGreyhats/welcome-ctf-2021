@@ -1,11 +1,5 @@
-FROM php:7.4-cli
+FROM php:7.4.20-apache
 
-RUN apt-get update
+COPY serve/ /var/www/html/
 
-COPY . /usr/src/app
-
-WORKDIR /usr/src/app
-
-EXPOSE 8000
-
-CMD ["sh", "php-server.sh"]
+CMD ["/bin/bash", "-c", "apachectl -D FOREGROUND"]
