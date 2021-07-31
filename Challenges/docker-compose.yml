@@ -17,4 +17,4 @@ services:
     ketchup:
         build: ./Web/Ketchup
         ports:
-            - "3001:80"
+            - "5208:80"
