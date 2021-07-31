@@ -14,3 +14,8 @@ x-pwn:
         - seccomp=unconfined
 
 services:
+    doors:
+        << : *pwn
+        build : ./Binary/Reverse/Doors
+        ports :
+            - "5301:5000"
