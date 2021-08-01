@@ -1,20 +1,13 @@
 #!/bin/bash
 
 # Read three inputs to be used as positional arguments.
-echo "Secret #1:"
-read sec1
-echo "Secret #2:"
-read sec2
-echo "Secret #3:"
-read sec3
+echo -e "Username: \c"; read user
+echo -e "Password: \c"; read pass
 
-# Hint that those inputs will be used as positional arguments in a bash script (given).
-printf "\nRunning hack.sh with arguments:\n"
-printf "1) $sec1\n"
-printf "2) $sec2\n"
-printf "3) $sec3\n\n"
+echo
 
-printf "Executing...\n"
-printf "____________________________\n\n"
+# Print the command to execute.
+echo -e "[exe] -> bash -c './login.sh \"$user\" \"$pass\"'"
 
-bash -c "./hack.sh $sec1 $sec2 $sec3"
+# Print script output.
+echo -e "[out] -> \c"; bash -c "./login.sh \"$user\" \"$pass\""

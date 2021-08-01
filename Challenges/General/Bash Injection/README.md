@@ -1,17 +1,16 @@
 # Challenge Details
 
-Can you guess the three secrets needed to unlock
-the flag?
+Can you guess the username and password needed to 
+unlock the flag?
 
 # Setup Instructions
 
-Download `hack.sh`.
+None.
 
 # Possible Hints
 
-Why couldn't we just enter the three required
-arguments? Can we, for the same reasons, perform
-a command injection?
+You are given the command that is executed. Can
+you inject a bash command?
 
 # Key Concepts
 
@@ -20,14 +19,15 @@ a command injection?
 
 # Solution
 
-Supply `word; cat get_flag.sh` as a positional
-argument.
+Inject a command by using this template for the
+username/ password: `"; <command>; #`.
+
+Since you know `login.sh` is executed, simply use
+`"; cat login.sh; #` as either the username/ password.
 
 # Learning Objectives
 
-Lack of double-quoting(s) when evaluating variables
-in bash can lead to vulnerabilities like command
-injections.
+Do **NOT** use `bash -c`.
 
 # Flag
 

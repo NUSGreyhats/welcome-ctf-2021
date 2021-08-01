@@ -20,6 +20,5 @@ COPY --from=src /lib/ /srv/lib/
 COPY --from=src /lib64/ /srv/lib64/
 
 # Copy over challenge files. Substitute ${BINARY} with the path to your binary
-COPY ./get_flag.sh /srv/app/get_flag.sh
-COPY ./hack.sh /srv/app/hack.sh
+COPY ./login.sh /srv/app/login.sh
 COPY ./run.sh  /srv/app/run
