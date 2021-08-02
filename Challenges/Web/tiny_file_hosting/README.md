@@ -18,7 +18,7 @@ docker-compose up -d
 
 ### Possible hints
 
-> I think Usain Bolt runs faster than Justin Gatlin, but a leopard beats then all! 
+> I think Usain Bolt runs faster than Justin Gatlin, but a leopard beats them all! 
 
 > PHP is the best language! Very convenient when you have enabled short tag.
 
