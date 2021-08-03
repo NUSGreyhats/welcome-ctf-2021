@@ -1,0 +1,110 @@
+<html>
+<!-- Credits to https://codepen.io/alvaromontoro/pen/BaKQzgG -->
+
+<head>
+  <title>Gates</title>
+  <link rel="stylesheet" href="gate.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+  <style>
+    #input-text {
+      position: absolute;
+      left: 50%;
+      bottom: 13%;
+      transform: translate(-50%, -50%);
+
+      font-size: large;
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    #input {
+      position: absolute;
+      left: 50%;
+      bottom: 8%;
+      transform: translate(-50%, -50%);
+
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    #result {
+      position: absolute;
+      left: 50%;
+      bottom: 0%;
+      transform: translate(-50%, -50%);
+
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cartoon hb">
+    <div class="sky r"></div>
+    <div class="cloud cloud-1 ha"></div>
+    <div class="cloud cloud-2 ha"></div>
+    <div class="shadow"></div>
+    <div class="minar-top minar-top-2"></div>
+    <div class="minar-top"></div>
+    <div class="minar ha"></div>
+    <div class="tower tower-5 tower-6 tower-7"></div>
+
+    <div class="house ha"></div>
+
+    <div class="main-roof-behind"></div>
+    <div class="main-roof ha"></div>
+    <div class="main-top"></div>
+
+    <div class="flag flag-4"></div>
+    <div class="main-tower-roof"></div>
+    <div class="main-tower"></div>
+    <div class="main ha"></div>
+    <div class="tower tower-3 tower-3a"></div>
+    <div class="wall ha"></div>
+    <div class="tower tower-1"></div>
+    <div class="tower tower-2"></div>
+    <div class="tower tower-3 tower-3b"></div>
+    <div class="tower tower-4"></div>
+    <div class="tower tower-5 tower-6"></div>
+    <div class="tower tower-5"></div>
+    <div class="brick"></div>
+
+    <div class="room-1"></div>
+    <div class="room-2"></div>
+    <div class="room-3 ha"></div>
+    <div class="window"></div>
+    <div class="window-curved"></div>
+    <div class="roof roof-1"></div>
+    <div class="roof roof-2"></div>
+    <div class="flag flag-1"></div>
+    <div class="flag flag-2"></div>
+    <div class="flag flag-3"></div>
+    <div class="flag-pole-top"></div>
+    <div class="flag-pole"></div>
+    <div class="house-roof"></div>
+    <div class="front-gate ha">
+      <div class="gate"></div>
+      <div class="balcony ha"></div>
+      <div class="triangle ha"></div>
+      <div class="front-poles"></div>
+    </div>
+
+  </div>
+  <div id="input-container">
+    <label id="input-text">Gate 1</label>
+    <input id="input" type="text" name="key" onsubmit="check()"/>
+    <p id="result">Correct</p>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/gates.js"></script>
+</body>
+
+</html>
