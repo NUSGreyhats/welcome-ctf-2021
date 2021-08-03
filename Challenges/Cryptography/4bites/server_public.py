@@ -110,7 +110,11 @@ class Challenge():
             qubits = self.alice.sendQubits()
             
             # Interception Begins
-            basis = bytes.fromhex(input())
+            try:
+                basis = bytes.fromhex(input())
+            except:
+                print('Error: The input must be a valid hexadecimal string')
+                exit(0)
             
             assert len(basis) == n//8
 
