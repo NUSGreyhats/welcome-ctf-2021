@@ -27,6 +27,13 @@ x-crypto:
         - seccomp=unconfined
 
 services:
+
+    hexdump-bof:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/hexdump-bof
+        ports:
+            - "5002:5000"
+            
     no-submit-security:
       build: Web/no_submit_security
       ports:
