@@ -8,8 +8,8 @@ FROM ubuntu:18.04 AS src
 # This is the actual container that runs
 FROM redpwn/jail:v0.0.1
 
-# Kill each connection after 60 wall seconds (more options in https://github.com/redpwn/jail#configuration-reference)
-ENV JAIL_TIME 60
+# Kill each connection after 180 wall seconds (more options in https://github.com/redpwn/jail#configuration-reference)
+ENV JAIL_TIME 180
 
 # Include the bare bones of /bin from `ubuntu` (ls, cat, sh)
 COPY --from=src /bin/ls /srv/bin/ls

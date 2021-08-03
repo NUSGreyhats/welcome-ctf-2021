@@ -45,7 +45,13 @@ services:
         build: ./Binary/Reverse/Pwn/hexdump-bof
         ports:
             - "5002:5000"
-            
+
+    flag-hunt:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/flag_hunter
+        ports:
+            - "5013:5000"           
+
     no-submit-security:
         build: Web/no_submit_security
         ports:
@@ -71,3 +77,4 @@ services:
         build: ./Binary/Reverse/Gates
         ports:
             - "5300:80"
+

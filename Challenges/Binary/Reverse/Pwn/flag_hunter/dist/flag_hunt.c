@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
 #include <time.h>
 
 struct Warrior
@@ -216,7 +218,21 @@ void playgame() {
 	}
 }
 
+void timeout(int signum) {
+    printf("Timeout!");
+    exit(-1);
+}
+
+void setup() {
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+    signal(SIGALRM, timeout);
+    alarm(180);
+}
+
 int main() {
+	setup();
 	playgame();
 	return 0;
 }
