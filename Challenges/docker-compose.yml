@@ -47,14 +47,19 @@ services:
             - "5002:5000"
             
     no-submit-security:
-      build: Web/no_submit_security
-      ports:
+        build: Web/no_submit_security
+        ports:
           - "5217:80"
           
     ketchup:
         build: ./Web/Ketchup
         ports:
             - "5208:80"
+            
+    covid_tracker:
+        build: ./Web/covid_tracker
+        ports:
+            - "5201:3000"
         
     burger:
         << : *crypto
