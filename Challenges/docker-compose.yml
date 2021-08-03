@@ -77,4 +77,9 @@ services:
         build: ./Binary/Reverse/Gates
         ports:
             - "5300:80"
-
+            
+    doors:
+        << : *pwn
+        build : ./Binary/Reverse/Doors
+        ports :
+            - "5301:5000"
