@@ -44,6 +44,11 @@ services:
       build: Web/no_submit_security
       ports:
           - "5217:80"
+          
+    ketchup:
+        build: ./Web/Ketchup
+        ports:
+            - "5208:80"
         
     burger:
         << : *crypto
