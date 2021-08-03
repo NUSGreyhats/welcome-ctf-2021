@@ -28,6 +28,12 @@ x-crypto:
 
 services:
 
+    distinct:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/distinct
+        ports:
+            - "5000:5000"
+            
     hexdump-bof:
         << : *pwn
         build: ./Binary/Reverse/Pwn/hexdump-bof
