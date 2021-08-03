@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Map | Covid Tracker</title>
+        <meta name="description" content="Covid Tracker Map">
+        <meta name="author" content="NUS Greyhats">
+        <link rel="icon" href="/favicon.jpg">
+        <link rel="stylesheet" href="/styles.css">
+
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+        <!-- CSS Reset -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+        <!-- Milligram CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+
+        <!-- AlpineJS -->
+        <script src="//unpkg.com/alpinejs" defer></script>
+
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+            crossorigin=""/>
+    </head>
+    <body>
+        <div class="container main" id="location-main" x-data="locationData()" x-init="searchLocations()">
+            <span class="title">
+                <img src="/favicon.jpg">
+                <h1>Covid Tracker Map</h1>
+            </span>
+
+            <h3 x-text="error" class="error"></h3>
+            <input type="text" class="search" x-model="search" x-on:change="searchLocations()" placeholder="Search">
+            <!--<div x-html="JSON.stringify(locations)"></div>-->
+
+            <div id="map"></div>
+        </div>
+
+
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+        <script>
+            var mymap = L.map('map').setView([1.3623796467781062, 103.83287520711916], 11);
+            const markers = new L.LayerGroup();
+            markers.addTo(mymap);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mymap);
+
+            function locationData() {
+                return {
+                    search: '',
+                    error: '',
+
+                    searchLocations() {
+                        fetch('/api/locations', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ search: this.search })
+                        })
+                        .then(res => { if(res.status == 403) { throw Error('Unauthorized') } else { return res; } })
+                        .then(res => res.json())
+                        .then(res => this.locationResults(res))
+                        .catch(res => this.error = res.message);
+                    },
+
+                    locationResults(locations) {
+                        console.log(locations);
+                        markers.clearLayers();
+                        for(const loc of locations) {
+                            const coords = loc.geo.split(",");
+                            L.marker(coords).bindTooltip(`${loc.name}: ${loc.cases}`, {permanent: true, direction: 'right'}).addTo(markers);
+                        }
+                    }
+
+                };
+            }
+        </script>
+    </body>
+</html>
