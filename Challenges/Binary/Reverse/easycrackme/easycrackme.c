@@ -50,8 +50,6 @@ void check4(char* key)
         char c1 = key[s1+i*2];
         if (c1 >= '0' && c1 <= '9') {
             c1 -= '0';
-        } else if (c1 >= 'A' && c1 <= 'F') {
-            c1 += - 'A' + 10;
         } else if (c1 >= 'a' && c1 <= 'f') {
             c1 += - 'a' + 10;
         }
@@ -59,8 +57,6 @@ void check4(char* key)
         char c2 = key[s1+i*2+1];
         if (c2 >= '0' && c2 <= '9') {
             c2 -= '0';
-        } else if (c2 >= 'A' && c2 <= 'F') {
-            c2 += - 'A' + 10;
         } else if (c2 >= 'a' && c2 <= 'f') {
             c2 += - 'a' + 10;
         }
