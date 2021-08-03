@@ -81,13 +81,17 @@ print('Note : 0 <= t <= Total signal time')
 print(f'Input up to {n} different time (μs) seperated by space :')
 t = input().split()
 if (len(t) > n):
-    print(f'Only {n} different time!')
+    print(f'Error : You can only input up to {n} different time!')
     exit(0)
 
 amplitude = []
 
 for i in range(len(t)):
-    t[i] = float(t[i])
+    try:
+        t[i] = float(t[i])
+    except:
+        print('Error : Only numerical values!!')
+        exit(0)
     if (0 <= t[i] < period * 4 * len(FLAG)):
         amplitude.append(str(S(t[i])))
     else:
