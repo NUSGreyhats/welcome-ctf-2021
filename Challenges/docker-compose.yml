@@ -66,3 +66,8 @@ services:
         build : ./Cryptography/burger
         ports :
            - "5210:5000"
+           
+    gates:
+        build: ./Binary/Reverse/Gates
+        ports:
+            - "5300:80"
