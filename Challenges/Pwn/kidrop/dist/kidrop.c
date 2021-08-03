@@ -1,4 +1,4 @@
-/* gcc -no-pie -fno-stack-protector ./kidrop.c -o kidrop */
+/* gcc -no-pie -fno-stack-protector ./bof.c -o bof */
 #include <stdio.h>
 
 void vuln()

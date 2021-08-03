@@ -1,6 +1,7 @@
 from pwn import *
 
-r = process("./bof")
+# r = process("./bof")
+r = remote("localhost", 5012)
 pause()
 
 RET = 0x0000000000400486
