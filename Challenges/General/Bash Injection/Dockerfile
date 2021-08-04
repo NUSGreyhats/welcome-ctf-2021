@@ -22,3 +22,6 @@ COPY --from=src /lib64/ /srv/lib64/
 # Copy over challenge files. Substitute ${BINARY} with the path to your binary
 COPY ./login.sh /srv/app/login.sh
 COPY ./run.sh  /srv/app/run
+
+RUN chmod +x /srv/app/login.sh
+RUN chmod +x /srv/app/run
