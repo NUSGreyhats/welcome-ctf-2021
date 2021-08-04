@@ -40,7 +40,9 @@ char getWireIndex(char color[], int length) {
 		else if (length == 4) {
 			if (color[1] == 1) return 0;
 			else {
-				int freq[5] = {0, 0, 0, 0, 0};
+				int freq[5];
+				for (int i = 0; i < 5; i++) freq[i] = 0;
+
 				for (int i = 0; i < length; i++) {
 					freq[color[i]] = 1;
 				}
@@ -91,7 +93,9 @@ void cc(char cuts[], int count, char color[], int colorLen) {
 }
 
 char* func(int n) {
-	int freq[4] = {1, 1, 1, 1};
+	int freq[4];
+	for (int i = 0; i < 4; i++) freq[i] = 1;
+
 	char* output = (char *) malloc(5);
 	int k = 0;
 	n %= 24;
