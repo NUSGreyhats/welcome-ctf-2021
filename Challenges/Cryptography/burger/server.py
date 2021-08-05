@@ -23,7 +23,11 @@ print('Welcome to Burger hashing machine!!!')
 
 for _ in range(100):
     print('Please input your text in hexadecimal :')
-    text = bytes.fromhex(input())
+    try:
+        text = bytes.fromhex(input())
+    except:
+        print('Error: The input must be a valid hexadecimal string')
+        exit(0)
     text = hash(text)
     print('Here\'s the hashed value :')
     print(text)
