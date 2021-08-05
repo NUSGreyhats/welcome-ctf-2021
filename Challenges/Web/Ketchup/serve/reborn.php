@@ -5,7 +5,7 @@
 </head>
 
 <body>
-  <!-- Version 2.2.3. Backup file contains version 2.2.2. -->
+  <!-- I like to use Vim because it always creates a backup for me, in case I forgot to save my work and my computer crashes. --->
 
 	<?php if ($_SERVER['REQUEST_METHOD'] === 'GET') : ?>
 		<form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
@@ -26,7 +26,8 @@
 
       if (strcmp($ketchup, 'no ketchup, raw sauce -- too many calories, not good') == 0) {
         echo '<h1>Well, site is still under construction</h1>';
-        echo '<h3>greyhats{n0_k3tchup_r4w_s4uc3_892e89h89e}</h3>';
+        include "flag.php";
+        echo $flag;
       } else {
         echo 'Wrong answer. Go away.';
       }
