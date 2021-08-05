@@ -46,6 +46,27 @@ services:
         ports:
             - "5002:5000"
             
+    fetusrop:
+        << : *pwn
+        build: ./Pwn/fetusrop
+        ports:
+            - "5011:5000"
+    babyrop:
+        << : *pwn
+        build: ./Pwn/babyrop
+        ports:
+            - "5012:5000"
+    kidrop:
+        << : *pwn
+        build: ./Pwn/kidrop
+        ports:
+            - "5013:5000"
+    teenrop:
+        << : *pwn
+        build: ./Pwn/teenrop
+        ports:
+            - "5014:5000"
+            
     no-submit-security:
         build: Web/no_submit_security
         ports:
