@@ -22,4 +22,4 @@ COPY --from=src /lib/ /srv/lib/
 COPY --from=src /lib64/ /srv/lib64/
 
 # Copy over challenge files. Substitute ${BINARY} with the path to your binary
-COPY ./dist/flag_hunt /srv/app/run
+COPY ./dist/flag_hunter /srv/app/run

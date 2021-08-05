@@ -46,7 +46,7 @@ services:
         ports:
             - "5002:5000"
 
-    flag-hunt:
+    flag-hunter:
         << : *pwn
         build: ./Binary/Reverse/Pwn/flag_hunter
         ports:

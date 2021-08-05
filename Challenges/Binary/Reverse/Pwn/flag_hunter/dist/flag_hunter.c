@@ -19,6 +19,16 @@ struct Guardian
 	int heal;
 };
 
+int getInt(char prompt[], int lower, int upper) {
+	int a = -1;
+	while (!(a >= lower && a <= upper)) {
+		printf("%s", prompt);
+		scanf("%d", &a);
+		while(getchar() != 10);
+	}
+	return a;
+}
+
 void practice() {
 	// practice mode is to give hint about integer overflow
 	printf("As the legend goes:\n");
@@ -33,14 +43,7 @@ void practice() {
 	int mana = 50;
 	while (1) {
 		printf("Your health: %d mana: %d\n", health, mana);
-		int choice = 0;
-		while (1) {
-			printf("Your choice of skill:\n");
-			scanf("%d", &choice);
-			if (choice >= 1 && choice <= 4) {
-				break;
-			}
-		}
+		int choice = getInt("Your choice of skill:\n", 1, 4);
 		if (choice == 1) {
 			printf("Your mana refreshed to 50\n");
 			mana = 50;
@@ -66,30 +69,25 @@ void practice() {
 }
 
 void hunt() {
-	int a;
 	struct Warrior warrior;
-	while (1) {
-		printf("Choose your hero 1. Mage 2. Slayer\n");
-		scanf("%d", &a);
-		if (a == 1) {
-			warrior.type = 1;
-			warrior.health = 42;
-			warrior.mana = 50;
-			printf("Your hero: Mage\n");
-			printf("    [1] Magic Bullet: Deal 20 Damage [cost : 10 MP]\n");
-			printf("    [2] Magic Book: Refresh Mana [cost : 0 MP]\n");
-			printf("    [3] Mana Shield: Defense [cost : 25 MP]\n");;
-			break;
-		} else if (a == 2) {
-			// this hero is wrong option, just to confuse player
-			warrior.type = 2;
-			warrior.health = 50;
-			warrior.mana = 0;
-			printf("Your hero: Slayer\n");
-			printf("    [1] Slash: Deals 20 Damage\n");
-			printf("    [2] Deadly Slash: Sacrifices 20 health and deals 40 damage\n");
-			break;
-		}
+	int choice;
+	choice = getInt("Choose your hero 1. Mage 2. Slayer\n", 1, 2);
+	if (choice == 1) {
+		warrior.type = 1;
+		warrior.health = 42;
+		warrior.mana = 50;
+		printf("Your hero: Mage\n");
+		printf("    [1] Magic Bullet: Deal 20 Damage [cost : 10 MP]\n");
+		printf("    [2] Magic Book: Refresh Mana [cost : 0 MP]\n");
+		printf("    [3] Mana Shield: Defense [cost : 25 MP]\n");;
+	} else if (choice == 2) {
+		// this hero is wrong option, just to confuse player
+		warrior.type = 2;
+		warrior.health = 50;
+		warrior.mana = 0;
+		printf("Your hero: Slayer\n");
+		printf("    [1] Slash: Deals 20 Damage\n");
+		printf("    [2] Deadly Slash: Sacrifices 20 health and deals 40 damage\n");
 	}
 
 	srand((unsigned) time(NULL));
@@ -120,71 +118,58 @@ void hunt() {
 			printf("    [1] Magic Bullet: Deal 20 Damage [cost : 10 MP]\n");
 			printf("    [2] Magic Book: Refresh Mana [cost : 0 MP]\n");
 			printf("    [3] Mana Shield: Defense [cost : 25 MP]\n");
-			a = 0;
-			while (1) {
-				printf("Your choice of skill:\n");
-				scanf("%d", &a);
-				if (a == 1) {
-					if (warrior.mana >= 10) {
-						warrior.mana -= 10;
-						guardian.health -= 20;
-						printf("Magic Bullet deals 20 damage to the Flag Guardian!\n");
-					} else {
-						printf("Your mana not enough!\n");
-					}
-					warrior.health -= guardian.damage;
-					printf("Guardian cause %d damage to you!\n", guardian.damage);
+			choice = getInt("Your choice of skill:\n", 1, 3);
+			if (choice == 1) {
+				if (warrior.mana >= 10) {
+					warrior.mana -= 10;
+					guardian.health -= 20;
+					printf("Magic Bullet deals 20 damage to the Flag Guardian!\n");
+				} else {
+					printf("Your mana not enough!\n");
+				}
+				warrior.health -= guardian.damage;
+				printf("Guardian cause %d damage to you!\n", guardian.damage);
+				guardian.health += guardian.heal;
+				printf("Guardian heals %d health!\n", guardian.heal);
+			} else if (choice == 2) {
+				warrior.mana = 50;
+				printf("Your mana has been refreshed\n");
+				warrior.health -= guardian.damage;
+				printf("Guardian cause %d damage to you!\n", guardian.damage);
+				guardian.health += guardian.heal;
+				printf("Guardian heals %d health!\n", guardian.heal);
+			} else if (choice == 3) {
+				if (warrior.mana >= 25) {
+					warrior.mana -= 25;
+					printf("Your enter defence mode\n");
 					guardian.health += guardian.heal;
 					printf("Guardian heals %d health!\n", guardian.heal);
-					break;
-				} else if (a == 2) {
-					warrior.mana = 50;
-					printf("Your mana has been refreshed\n");
-					warrior.health -= guardian.damage;
-					printf("Guardian cause %d damage to you!\n", guardian.damage);
-					guardian.health += guardian.heal;
-					printf("Guardian heals %d health!\n", guardian.heal);
-					break;
-				} else if (a == 3) {
-					if (warrior.mana >= 25) {
-						warrior.mana -= 25;
-						printf("Your enter defence mode\n");
-						guardian.health += guardian.heal;
-						printf("Guardian heals %d health!\n", guardian.heal);
-					} else {
-						printf("Your mana not enough!\n");
-					}
-					break;
+				} else {
+					printf("Your mana not enough!\n");
 				}
 			}
 		} else if (warrior.type == 2) {
 			printf("    [1] Slash: Deals 20 Damage\n");
 			printf("    [2] Deadly Slash: Sacrifices 20 health and deals 40 damage\n");
-			a = 0;
-			while (1) {
-				printf("Your choice of skill:\n");
-				scanf("%d", &a);
-				if (a == 1) {
-					guardian.health -= 20;
+			choice = getInt("Your choice of skill:\n", 1, 2);
+			if (choice == 1) {
+				guardian.health -= 20;
+				warrior.health -= guardian.damage;
+				printf("Slash deals 20 damage to the Flag Guardian!\n");
+				printf("Guardian cause %d damage to you!\n", guardian.damage);
+				guardian.health += guardian.heal;
+				printf("Guardian heals %d health!\n", guardian.heal);
+			} else if (choice == 2) {
+				if (warrior.health >= 20) {
+					warrior.health -= 20;
+					guardian.health -= 40;
+					printf("Deadly Slash deals 40 damage to the Flag Guardian!\n");
 					warrior.health -= guardian.damage;
-					printf("Slash deals 20 damage to the Flag Guardian!\n");
 					printf("Guardian cause %d damage to you!\n", guardian.damage);
 					guardian.health += guardian.heal;
 					printf("Guardian heals %d health!\n", guardian.heal);
-					break;
-				} else if (a == 2) {
-					if (warrior.health >= 20) {
-						warrior.health -= 20;
-						guardian.health -= 40;
-						printf("Deadly Slash deals 40 damage to the Flag Guardian!\n");
-						warrior.health -= guardian.damage;
-						printf("Guardian cause %d damage to you!\n", guardian.damage);
-						guardian.health += guardian.heal;
-						printf("Guardian heals %d health!\n", guardian.heal);
-					} else {
-						printf("Your health not enough!\n");
-					}
-					break;
+				} else {
+					printf("Your health not enough!\n");
 				}
 			}
 		}
@@ -205,10 +190,8 @@ void hunt() {
 
 void playgame() {
 	printf("Welcome to Flag Hunter. The world relies on you to defeat the Flag Guardian.\n");
-	int a;
 	while (1) {
-		printf("Choose Your play mode: 1. practice 2. hunt\n");
-		scanf("%d", &a);
+		int a = getInt("Choose Your play mode: 1. practice 2. hunt\n", 1, 2);
 		if (a == 1) {
 			practice();
 		}
@@ -236,3 +219,4 @@ int main() {
 	playgame();
 	return 0;
 }
+
