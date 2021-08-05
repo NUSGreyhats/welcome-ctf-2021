@@ -12,8 +12,40 @@ x-pwn:
     security_opt:
         - apparmor=unconfined
         - seccomp=unconfined
+        
+x-crypto:
+    &crypto
+    cap_drop:
+        - all
+    cap_add:
+        - chown
+        - setuid
+        - setgid
+        - sys_admin
+    security_opt:
+        - apparmor=unconfined
+        - seccomp=unconfined
 
 services:
+
+    distinct:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/distinct
+        ports:
+            - "5000:5000"
+            
+    notepad_minus_minus:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/notepad--
+        ports:
+            - "5001:5000"
+            
+    hexdump-bof:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/hexdump-bof
+        ports:
+            - "5002:5000"
+            
     fetusrop:
         << : *pwn
         build: ./Pwn/fetusrop
@@ -34,3 +66,41 @@ services:
         build: ./Pwn/teenrop
         ports:
             - "5014:5000"
+            
+    no-submit-security:
+        build: Web/no_submit_security
+        ports:
+          - "5217:80"
+          
+    ketchup:
+        build: ./Web/Ketchup
+        ports:
+            - "5208:80"
+            
+    covid_tracker:
+        build: ./Web/covid_tracker
+        ports:
+            - "5201:3000"
+        
+    burger:
+        << : *crypto
+        build : ./Cryptography/burger
+        ports :
+           - "5210:5000"
+           
+    gates:
+        build: ./Binary/Reverse/Gates
+        ports:
+            - "5300:80"
+            
+    doors:
+        << : *pwn
+        build : ./Binary/Reverse/Doors
+        ports :
+            - "5301:5000"
+            
+    bash_injection:
+        << : *pwn
+        build: "./General/Bash Injection"
+        ports:
+            - "5401:5000"

@@ -1,0 +1,16 @@
+{
+  "name": "covid_tracker",
+  "version": "1.0.0",
+  "description": "Super secure Covid Tracker with some Secrets",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node dist/index.js"
+  },
+  "author": "enigmatrix",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "sqlite3": "^5.0.2"
+  }
+}
