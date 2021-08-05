@@ -1,6 +1,22 @@
 /* gcc -fno-stack-protector ./teenrop.c -o teenrop */
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+
+
+void timeout(int signum) {
+    printf("Timeout!");
+    exit(-1);
+}
+
+void setup() {
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
+    signal(SIGALRM, timeout);
+    alarm(60);
+}
 
 char* menu = "Simple Phonebook ###\n1) Set contact\n2) Get contact";
 
@@ -13,6 +29,8 @@ unsigned long long read_ull()
 
 int main()
 {
+    setup();
+
     int choice;
     int exit = 0;
 
