@@ -12,7 +12,7 @@ x-pwn:
     security_opt:
         - apparmor=unconfined
         - seccomp=unconfined
-        
+
 x-crypto:
     &crypto
     cap_drop:
@@ -27,6 +27,11 @@ x-crypto:
         - seccomp=unconfined
 
 services:
+    4bites:
+        << : *crypto
+        build : ./Cryptography/4bites
+        ports :
+            - "5211:5000"
 
     distinct:
         << : *pwn
