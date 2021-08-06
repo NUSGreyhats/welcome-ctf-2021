@@ -2,7 +2,7 @@
 
 A binary file - `flag.exe` - has been hidden in `image.png` via
 [LSB-Steganography](https://youtu.be/TWEXCYQKyDc)! It is known
-that `flag.exe` is 8,648 bytes large. Also, the file is spread
+that `flag.exe` is 11,392 bytes large. Also, the file is spread
 across the first N pixels of the image when traversing in
 [row-major order](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
 
@@ -37,4 +37,4 @@ A proposed solution can be found in `solution.py`.
 
 # Flag
 
-`team_rocket{m3wtw0_1a5t_533n_c3rul3an_cav3}`
+`greyhats{m0r3_th6n_m33t5_the_3y3_189794872}`
