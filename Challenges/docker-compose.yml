@@ -50,6 +50,11 @@ services:
         build: ./Binary/Reverse/Pwn/hexdump-bof
         ports:
             - "5002:5000"
+    flag-hunter:
+        << : *pwn
+        build: ./Binary/Reverse/Pwn/flag_hunter
+        ports:
+            - "5015:5000"           
             
     fetusrop:
         << : *pwn
