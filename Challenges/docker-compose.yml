@@ -27,6 +27,10 @@ x-crypto:
         - seccomp=unconfined
 
 services:
+    tiny-file-hosting:
+        build: Web/tiny_file_hosting
+        ports:
+            - "5207:80"
     4bites:
         << : *crypto
         build : ./Cryptography/4bites

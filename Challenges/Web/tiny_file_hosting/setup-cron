@@ -1,0 +1,1 @@
+*/3 * * * * root /bin/bash /root/setup.sh
