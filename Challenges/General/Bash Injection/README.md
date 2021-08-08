@@ -31,4 +31,4 @@ Do **NOT** use `bash -c`.
 
 # Flag
 
-`flag{86sh_1n73ct10n_y6333}`
+`greyhats{86sh_1n73ct10n_y6333}`
