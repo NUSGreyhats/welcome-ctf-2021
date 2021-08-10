@@ -35,6 +35,28 @@ RUN adduser \
 RUN chmod +x /opt/CTFd/docker-entrypoint.sh \
     && chown -R 1001:1001 /opt/CTFd /var/log/CTFd /var/uploads
 
+
+# install certbot and nginx, configuration
+RUN apt-get update -y
+RUN apt-get install -y nginx
+RUN apt-get install -y certbot python-certbot-nginx
+
+RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+RUN chown -R www-data:www-data /var/lib/nginx
+
+EXPOSE 80 443
+
+# add nginx staging conf
+ADD /etc/nginx/sites-available/welcomectf.tk
+
+# create symlinks
+RUN ln -s /etc/nginx/sites-available/welcomectf.tk /etc/nginx/sites-enabled/welcomectf.tk
+
+# work dir
+WORKDIR /etc/nginx
+
+VOLUME ["/etc/letsencrypt"]
+
 USER 1001
-EXPOSE 8000
+EXPOSE 8000 
 ENTRYPOINT ["/opt/CTFd/docker-entrypoint.sh"]
