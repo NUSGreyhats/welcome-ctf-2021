@@ -18,7 +18,7 @@ RUN rm /etc/nginx/sites-enabled/default
 COPY ./conf/http.conf /etc/nginx/nginx.conf
 
 # deamon mode off
-RUN chown -R www-data:www-data /var/lib/nginx
+# RUN chown -R www-data:www-data /var/lib/nginx
 
 # expose ports
 EXPOSE 80 443
@@ -30,6 +30,6 @@ WORKDIR /etc/nginx
 COPY docker-entrypoint.sh .
 
 # make certs dir as volume
-VOLUME ["/etc/letsencrypt"]
+# VOLUME ["/etc/letsencrypt"]
 
 # CMD ["/etc/nginx/docker-entrypoint.sh"]
