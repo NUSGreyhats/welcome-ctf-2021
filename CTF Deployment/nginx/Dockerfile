@@ -27,7 +27,7 @@ EXPOSE 80 443
 WORKDIR /etc/nginx
 
 # add entrypoint
-COPY docker-entrypoint.sh .
+# COPY docker-entrypoint.sh .
 
 # make certs dir as volume
 # VOLUME ["/etc/letsencrypt"]
