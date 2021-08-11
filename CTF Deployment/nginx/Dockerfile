@@ -32,4 +32,4 @@ COPY ./docker-entrypoint.sh ./docker-entrypoint.sh
 # make certs dir as volume
 VOLUME ["/etc/letsencrypt"]
 
-CMD ["/etc/nginx/docker-entrypoint.sh"]
+CMD ["/bin/bash"]
