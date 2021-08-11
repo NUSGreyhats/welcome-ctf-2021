@@ -2,7 +2,7 @@ version: '2'
 
 services:
   ctfd:
-    build: ctfd/ctfd
+    image: ctfd/ctfd
     user: root
     restart: always
     ports:
