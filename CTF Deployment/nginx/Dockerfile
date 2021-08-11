@@ -1,7 +1,35 @@
-FROM nginx:latest
+FROM ubuntu:18.04
 
-RUN rm /etc/nginx/conf.d/default.conf
-COPY ./conf/http.conf /etc/nginx/nginx.conf
+# install nginx
+RUN apt-get update -y
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository -y ppa:nginx/stable
+RUN apt-get update -y
+RUN apt-get install -y nginx
 
-EXPOSE 80
-EXPOSE 443
+# install certbot
+RUN add-apt-repository ppa:certbot/certbot
+RUN apt-get update -y
+RUN apt-get install -y certbot python-certbot-nginx
+
+# add nginx live conf
+RUN rm /etc/nginx/nginx.conf
+COPY conf/http.conf /etc/nginx/nginx.conf
+
+# deamon mode off
+RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+RUN chown -R www-data:www-data /var/lib/nginx
+
+# expose ports
+EXPOSE 80 443
+
+# work dir
+WORKDIR /etc/nginx
+
+# add entrypoint
+ADD docker-entrypoint.sh .
+
+# make certs dir as volume
+VOLUME ["/etc/letsencrypt"]
+
+CMD ["/etc/nginx/docker-entrypoint.sh"]
