@@ -24,7 +24,7 @@ COPY ./conf/http.conf /etc/nginx/nginx.conf
 EXPOSE 80 443
 
 # work dir
-WORKDIR /etc/nginx
+# WORKDIR /etc/nginx
 
 # add entrypoint
 # COPY docker-entrypoint.sh .
