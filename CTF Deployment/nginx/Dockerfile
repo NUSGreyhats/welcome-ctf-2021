@@ -32,6 +32,4 @@ ADD docker-entrypoint.sh .
 # make certs dir as volume
 VOLUME ["/etc/letsencrypt"]
 
-RUN certbot --nginx -d welcomectf.tk -d welcomectf.tk
-
 CMD ["/etc/nginx/docker-entrypoint.sh"]
