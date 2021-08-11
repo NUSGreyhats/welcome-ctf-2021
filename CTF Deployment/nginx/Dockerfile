@@ -14,10 +14,10 @@ RUN apt-get install -y certbot python-certbot-nginx
 
 # add nginx live conf
 RUN rm /etc/nginx/nginx.conf
-COPY conf/http.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/sites-enabled/default
+COPY ./conf/http.conf /etc/nginx/nginx.conf
 
 # deamon mode off
-RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 RUN chown -R www-data:www-data /var/lib/nginx
 
 # expose ports
