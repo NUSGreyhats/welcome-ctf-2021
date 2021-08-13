@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Login | Covid Tracker</title>
+        <meta name="description" content="Login to Covid Tracker">
+        <meta name="author" content="NUS Greyhats">
+        <link rel="icon" href="/favicon.jpg">
+        <link rel="stylesheet" href="/styles.css">
+
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+        <!-- CSS Reset -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+        <!-- Milligram CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+
+        <!-- AlpineJS -->
+        <script src="//unpkg.com/alpinejs" defer></script>
+    </head>
+    <body class="container">
+        <form class="main" x-data="loginForm()" @submit.prevent="submitData">
+            <fieldset>
+                <h1>Covid Tracker Login</h1>
+                <h3 class="error" x-text="message"></h3>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" x-model="formData.username">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" x-model="formData.password">
+                <input class="button-primary" type="submit" value="login">
+            </fieldset>
+        </form>
+
+        <script>
+            function loginForm() {
+                return {
+                    formData: {
+                        username: '',
+                        password: '',
+                    },
+                    message: '',
+                    submitData() {
+                        this.message = '';
+                        fetch('/api/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(this.formData),
+                        })
+                        .then(res => {
+                            if(res.status != 200) {
+                                res.json().then(b => this.message = b.err);
+                            } else {
+                                window.location.href = res.url;
+                            }
+                        });
+                    }
+                };
+            }
+        </script>
+    </body>
+</html>
