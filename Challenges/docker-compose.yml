@@ -138,3 +138,7 @@ services:
             - "5227:80"
         extra_hosts:
             - "topsecret.local:127.0.0.1"
+    krane:
+        build: Binary/Reverse/keep_reversing_and_nobody_explodes
+        ports:
+            - "5302:80"
