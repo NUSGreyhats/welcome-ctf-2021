@@ -134,7 +134,7 @@ services:
             - "5401:5000"
     resume:
         build: Web/resume
-            ports:
+        ports:
             - "5227:80"
         extra_hosts:
             - "topsecret.local:127.0.0.1"
