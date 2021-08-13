@@ -25,7 +25,7 @@ x-crypto:
     security_opt:
         - apparmor=unconfined
         - seccomp=unconfined
-        
+
 services:
 
     tiny-file-hosting:
@@ -121,6 +121,12 @@ services:
         ports :
             - "5301:5000"
             
+    radio:
+        << : *crypto
+        build : ./General/radio
+        ports :
+            - "5213:5000"
+            
     bash_injection:
         << : *pwn
         build: "./General/Bash Injection"
@@ -132,4 +138,3 @@ services:
             - "5227:80"
         extra_hosts:
             - "topsecret.local:127.0.0.1"
-            
