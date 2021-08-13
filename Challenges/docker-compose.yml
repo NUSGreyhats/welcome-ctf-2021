@@ -13,19 +13,6 @@ x-pwn:
         - apparmor=unconfined
         - seccomp=unconfined
 
-x-crypto:
-    &crypto
-    cap_drop:
-        - all
-    cap_add:
-        - chown
-        - setuid
-        - setgid
-        - sys_admin
-    security_opt:
-        - apparmor=unconfined
-        - seccomp=unconfined
-
 services:
     tiny-file-hosting:
         build: Web/tiny_file_hosting
@@ -118,3 +105,10 @@ services:
         build: "./General/Bash Injection"
         ports:
             - "5401:5000"
+    resume:
+        build: Web/resume
+            ports:
+            - "5227:80"
+        extra_hosts:
+            - "topsecret.local:127.0.0.1"
+            
