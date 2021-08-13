@@ -1,7 +1,7 @@
 from pwn import *
 
 if args.REMOTE:
-    p = remote('localhost', 5002)
+    p = remote('challs2.nusgreyhats.org', 5002)
 else:
     p = process('./dist/hexdumpbof.o')
 

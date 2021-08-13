@@ -15,6 +15,7 @@ ENV JAIL_TIME 60
 COPY --from=src /bin/ls /srv/bin/ls
 COPY --from=src /bin/cat /srv/bin/cat
 COPY --from=src /bin/sh /srv/bin/sh
+COPY --from=src /bin/sh /srv/bin/date
 
 # Copy the minumum required shared libraries for your binaries. Run `ldd <binary>` to find these.
 # The below lines will copy libc.so.6 and ld.so from src, and are usually sufficient
