@@ -1,6 +1,6 @@
 from Crypto.Util.number import bytes_to_long, getPrime
 
-FLAG = b"greyhats{P0lyn0M1al5_Ar3_SuP3RI0R}"
+FLAG = b"???"
 
 n = len(FLAG) * 8
 F = GF(2^n, 'x')
@@ -16,9 +16,6 @@ for i in range(n):
 a = getPrime(n)
 A = g^a
 coefficient = A.polynomial().list()
-
-# make sure it has len of n
-coefficient = coefficient + [0 for _ in range(n - len(coefficient))]
 
 print(f'n = {n}')
 print(f'mod = {F.modulus()}')

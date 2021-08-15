@@ -19,6 +19,8 @@ f.write(f'A = {A}\n')
 f.write(f'phi = {phi}\n')
 
 random.seed(primes[0])
+
+# Standard RSA
 p = next_prime(random.randint(1 << 2047, 1 << 2048))
 q = next_prime(random.randint(1 << 2047, 1 << 2048))
 
