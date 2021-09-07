@@ -8,7 +8,7 @@ A resume generator website, user can enter their personal details, backend will 
 
 In the older version of wkhtmltopdf(prior of the latest 12.6, refer to [wkhtmltopdf/wkhtmltopdf#4536](https://github.com/wkhtmltopdf/wkhtmltopdf/issues/4536) ), it is vulnerable to local file disclosure. 
 
-I am hosting another website locally, its domain will be resolved via /etc/hosts. This website requires login, but common parameters and weak credentials are being used. Player needs to craft an auto-submitting form to login to the website to get the flag.
+I am hosting another website locally, its domain will be resolved via /etc/hosts. This website requires login, but weak credentials are being used. Player needs to craft an auto-submitting form to login to the website to get the flag.
 
 ### Setup Instruction
 

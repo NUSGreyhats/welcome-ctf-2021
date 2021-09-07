@@ -40,31 +40,31 @@ services:
 
     distinct:
         << : *pwn
-        build: ./Binary/Reverse/Pwn/distinct
+        build: ./Pwn/distinct
         ports:
             - "5000:5000"
             
     notepad_minus_minus:
         << : *pwn
-        build: ./Binary/Reverse/Pwn/notepad--
+        build: ./Pwn/notepad--
         ports:
             - "5001:5000"
             
     hexdump-bof:
         << : *pwn
-        build: ./Binary/Reverse/Pwn/hexdump-bof
+        build: ./Pwn/hexdump-bof
         ports:
             - "5002:5000"
             
     opwn:
         << : *pwn
-        build: ./Binary/Reverse/Pwn/opwn
+        build: ./Pwn/opwn
         ports:
             - "5005:5000"
             
     flag-hunter:
         << : *pwn
-        build: ./Binary/Reverse/Pwn/flag_hunter
+        build: ./Pwn/flag_hunter
         ports:
             - "5015:5000"           
             
@@ -111,13 +111,13 @@ services:
            - "5210:5000"
            
     gates:
-        build: ./Binary/Reverse/Gates
+        build: ./Reverse/Gates
         ports:
             - "5300:80"
             
     doors:
         << : *pwn
-        build : ./Binary/Reverse/Doors
+        build : ./Reverse/Doors
         ports :
             - "5301:5000"
             
@@ -139,6 +139,6 @@ services:
         extra_hosts:
             - "topsecret.local:127.0.0.1"
     krane:
-        build: Binary/Reverse/keep_reversing_and_nobody_explodes
+        build: ./Reverse/keep_reversing_and_nobody_explodes
         ports:
             - "5302:80"
